@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 2,
+  "packId": "owner-pack-6aa5b38bbba0",
+  "releaseId": "v1",
+  "variantId": "shuimo",
+  "title": "2027法硕法基强化题",
+  "description": "2027法硕法基强化题，由 Owner Inbox 自动静态审计并发布。",
+  "version": "2026.16.08+1fa43b73",
+  "resourceVersion": "owner-pack-6aa5b38bbba0-shuimo-1fa43b734795-137221",
+  "payload": {
+    "format": "apkg",
+    "entryResourceIds": [
+      "source-apkg"
+    ]
+  },
+  "runtime": {
+    "contentFormat": "anki",
+    "renderEngine": "anki-core-v1"
+  },
+  "counts": {
+    "sourceCardCount": 180,
+    "finalCardCount": 180,
+    "deckCount": 3,
+    "duplicateCardCountRemoved": 0,
+    "uniqueKnowledgeMapCount": 0
+  },
+  "resources": [
+    {
+      "id": "source-apkg",
+      "role": "apkg",
+      "path": "artifacts/owner-pack-6aa5b38bbba0/v1/shuimo-1fa43b734795.apkg",
+      "mediaType": "application/octet-stream",
+      "sizeBytes": 137221,
+      "integrity": {
+        "algorithm": "sha256",
+        "digest": "1fa43b7347956021a3e28d3e7cb9d1988d06da387db1ec7c3711b99ee4dc0a1d"
+      },
+      "cachePolicy": "immutable"
+    }
+  ]
+}
