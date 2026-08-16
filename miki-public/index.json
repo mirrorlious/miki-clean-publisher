@@ -3,6 +3,80 @@
   "feedType": "miki-owner-publisher",
   "publisher": "mirrorlious",
   "repository": "mirrorlious/miki-clean-publisher",
-  "updatedAt": "2026-08-17T00:00:00.000000+00:00",
-  "packs": []
+  "updatedAt": "2026-08-16T23:37:15.980899+00:00",
+  "packs": [
+    {
+      "id": "owner-pack-6aa5b38bbba0",
+      "packId": "owner-pack-6aa5b38bbba0",
+      "title": "2027法硕法基强化题",
+      "description": "2027法硕法基强化题，由 Owner Inbox 自动静态审计并发布。",
+      "subject": "",
+      "type": "cards",
+      "version": "2026.16.08+1fa43b73",
+      "resourceVersion": "owner-pack-6aa5b38bbba0-shuimo-1fa43b734795-137221",
+      "manifestSchemaVersion": 2,
+      "cardCount": 180,
+      "deckCount": 3,
+      "noteCount": 180,
+      "license": "仅供个人学习",
+      "author": "Owner 上传",
+      "usageHint": "加入后可在 Miki 公共池中安装。",
+      "manifestUrl": "https://raw.githubusercontent.com/mirrorlious/miki-clean-publisher/5761030b0b23ea21e046b3ef6ea19733ac1976ef/.miki-owner-pack-6aa5b38bbba0-shuimo.manifest.v2.json",
+      "publisherChannel": "owner",
+      "sourceRepository": "mirrorlious/miki-clean-publisher",
+      "sourceCommit": "5761030b0b23ea21e046b3ef6ea19733ac1976ef",
+      "sourceApkgPath": "artifacts/owner-pack-6aa5b38bbba0/v1/shuimo-1fa43b734795.apkg",
+      "sourceSha256": "1fa43b7347956021a3e28d3e7cb9d1988d06da387db1ec7c3711b99ee4dc0a1d",
+      "templateEditPolicy": "fields-only",
+      "javascriptPolicy": "fingerprint-gated-disabled-by-default",
+      "templateReportUrl": "https://raw.githubusercontent.com/mirrorlious/miki-clean-publisher/5761030b0b23ea21e046b3ef6ea19733ac1976ef/.miki-reports/owner-pack-6aa5b38bbba0-shuimo.json",
+      "t1CandidateCount": 0,
+      "blockedTemplateCount": 0,
+      "releaseId": "",
+      "variantId": "shuimo",
+      "currentReleaseId": "v1",
+      "currentVariantId": "shuimo",
+      "releases": [
+        {
+          "releaseId": "v1",
+          "displayVersion": "1",
+          "status": "ACTIVE",
+          "defaultVariantId": "shuimo",
+          "contentFingerprint": "sha256:61cb5421d2598ba51cec8a07f3ef3545b05d0de8f26451023669294f5cc1b3fc",
+          "variants": [
+            {
+              "id": "owner-pack-6aa5b38bbba0",
+              "packId": "owner-pack-6aa5b38bbba0",
+              "title": "2027法硕法基强化题",
+              "description": "2027法硕法基强化题，由 Owner Inbox 自动静态审计并发布。",
+              "subject": "",
+              "type": "cards",
+              "version": "2026.16.08+1fa43b73",
+              "resourceVersion": "owner-pack-6aa5b38bbba0-shuimo-1fa43b734795-137221",
+              "manifestSchemaVersion": 2,
+              "cardCount": 180,
+              "deckCount": 3,
+              "noteCount": 180,
+              "license": "仅供个人学习",
+              "author": "Owner 上传",
+              "usageHint": "加入后可在 Miki 公共池中安装。",
+              "manifestUrl": "https://raw.githubusercontent.com/mirrorlious/miki-clean-publisher/5761030b0b23ea21e046b3ef6ea19733ac1976ef/.miki-owner-pack-6aa5b38bbba0-shuimo.manifest.v2.json",
+              "publisherChannel": "owner",
+              "sourceRepository": "mirrorlious/miki-clean-publisher",
+              "sourceCommit": "5761030b0b23ea21e046b3ef6ea19733ac1976ef",
+              "sourceApkgPath": "artifacts/owner-pack-6aa5b38bbba0/v1/shuimo-1fa43b734795.apkg",
+              "sourceSha256": "1fa43b7347956021a3e28d3e7cb9d1988d06da387db1ec7c3711b99ee4dc0a1d",
+              "templateEditPolicy": "fields-only",
+              "javascriptPolicy": "fingerprint-gated-disabled-by-default",
+              "templateReportUrl": "https://raw.githubusercontent.com/mirrorlious/miki-clean-publisher/5761030b0b23ea21e046b3ef6ea19733ac1976ef/.miki-reports/owner-pack-6aa5b38bbba0-shuimo.json",
+              "t1CandidateCount": 0,
+              "blockedTemplateCount": 0,
+              "releaseId": "v1",
+              "variantId": "shuimo"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
