@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "repository": "mirrorlious/miki-clean-publisher",
+  "publisher": "mirrorlious",
+  "defaults": {
+    "author": "原卡作者",
+    "license": "仅供个人学习",
+    "subject": "",
+    "usageHint": "加入后可在 Miki 公共池中安装。",
+    "runtime": {
+      "contentFormat": "anki",
+      "renderEngine": "anki-core-v1"
+    }
+  },
+  "packs": [],
+  "pendingClassification": []
+}
