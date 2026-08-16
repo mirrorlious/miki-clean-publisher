@@ -12,6 +12,22 @@
       "renderEngine": "anki-core-v1"
     }
   },
+  "sourceInbox": {
+    "repository": "mirrorlious/ankicardsfo1po",
+    "branch": "main",
+    "lastSeenCommit": "b3c632014ddc23e14a3f4124ca7721a3c60f8e69",
+    "bootstrap": [
+      {
+        "sourceCommit": "fec2deec58135cb9a9b99a94b19934a9029f798f",
+        "sourcePath": "2027法硕法基强化题-水墨青.apkg",
+        "provenance": "OWNER_UPLOAD_ASSERTION"
+      }
+    ],
+    "denyTokens": [
+      "zh2000",
+      "dyl"
+    ]
+  },
   "packs": [],
   "pendingClassification": []
 }
