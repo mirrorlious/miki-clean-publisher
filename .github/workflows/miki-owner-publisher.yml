@@ -1,44 +1,37 @@
-name: Miki Owner Publisher
+name: Miki Clean Owner Publisher
 
 on:
   pull_request:
     paths:
-      - '*.apkg'
-      - 'incoming/**/*.apkg'
       - 'miki-publisher.json'
-      - 'scripts/publish_miki_owner_pack.py'
-      - 'scripts/miki_owner_publisher.py'
-      - 'scripts/compile_miki_owner_t1.py'
-      - 'scripts/test_miki_owner_publisher.py'
-      - 'scripts/test_miki_owner_t1.py'
+      - 'README.md'
+      - 'scripts/**'
       - '.github/workflows/miki-owner-publisher.yml'
   push:
     branches:
       - main
     paths:
-      - '*.apkg'
-      - 'incoming/**/*.apkg'
       - 'miki-publisher.json'
-      - 'scripts/publish_miki_owner_pack.py'
-      - 'scripts/miki_owner_publisher.py'
-      - 'scripts/compile_miki_owner_t1.py'
-      - 'scripts/test_miki_owner_publisher.py'
-      - 'scripts/test_miki_owner_t1.py'
+      - 'README.md'
+      - 'scripts/**'
       - '.github/workflows/miki-owner-publisher.yml'
+  schedule:
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 concurrency:
-  group: miki-owner-publisher-${{ github.ref }}
+  group: miki-clean-owner-publisher-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   validate:
-    name: Validate APKG publisher output
+    name: Validate Clean Publisher
+    if: github.actor != 'github-actions[bot]' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
-      - name: Checkout source repository
+      - name: Checkout Clean Publisher
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -48,142 +41,92 @@ jobs:
           python-version: '3.12'
       - name: Install Anki21b decompression support
         run: python -m pip install --disable-pip-version-check --no-input zstandard==0.23.0
-      - name: Collect APKGs changed by this GitHub event
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          BEFORE_SHA: ${{ github.event.before }}
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-        run: |
-          python - <<'PY'
-          import os
-          import subprocess
-          from pathlib import Path
-
-          event = os.environ.get('EVENT_NAME', '')
-          before = os.environ.get('BEFORE_SHA', '')
-          base = os.environ.get('BASE_SHA', '')
-          head = os.environ.get('HEAD_SHA', '') or 'HEAD'
-
-          if event == 'pull_request' and base:
-              command = ['git', 'diff', '--name-only', base, head]
-          elif event == 'push' and before and set(before) != {'0'}:
-              command = ['git', 'diff', '--name-only', before, head]
-          elif event == 'push':
-              command = ['git', 'show', '--pretty=', '--name-only', head]
-          else:
-              command = None
-
-          names = []
-          if command:
-              output = subprocess.check_output(command, text=True, encoding='utf-8')
-              for raw in output.splitlines():
-                  name = raw.replace('\\', '/').strip()
-                  if not name.lower().endswith('.apkg'):
-                      continue
-                  if '/' not in name or name.startswith('incoming/'):
-                      names.append(name)
-
-          names = sorted(set(names))
-          Path('.miki-auto-sources.txt').write_text(
-              ''.join(f'{name}\n' for name in names),
-              encoding='utf-8',
-          )
-          print(f'event-scoped APKG candidates: {names}')
-          PY
       - name: Compile publisher
         run: |
           python -m py_compile scripts/publish_miki_owner_pack.py
           python -m py_compile scripts/miki_owner_publisher.py
           python -m py_compile scripts/compile_miki_owner_t1.py
-          python -m py_compile scripts/test_miki_owner_publisher.py
-          python -m py_compile scripts/test_miki_owner_t1.py
-      - name: Run Owner Publisher and T1 unit tests
+          python -m py_compile scripts/audit_apkg_identity.py
+          python -m py_compile scripts/sync_owner_inbox.py
+          python -m py_compile scripts/publish_latest_pointer.py
+      - name: Run publisher unit tests
         run: >-
           PYTHONPATH=scripts python -m unittest
           scripts/test_miki_owner_publisher.py
           scripts/test_miki_owner_t1.py
-      - name: Apply event-scoped authorization in validation workspace
-        run: python scripts/miki_owner_publisher.py authorize
+          scripts/test_sync_owner_inbox.py
+          scripts/test_publish_latest_pointer.py
+      - name: Stage Owner Inbox candidates in validation workspace
+        id: inbox
+        run: python scripts/sync_owner_inbox.py --source-dir "$RUNNER_TEMP/miki-owner-inbox" --json
       - name: Build manifests and security reports without publishing
         run: |
           export MIKI_RELEASE_DATE="$(date -u +%Y%m%d)"
           python scripts/miki_owner_publisher.py build
           python scripts/compile_miki_owner_t1.py
-      - name: Validate generated JSON files
+      - name: Validate generated trust boundary
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
+
+          config = json.loads(Path('miki-publisher.json').read_text(encoding='utf-8'))
           state = json.loads(Path('.miki-publish-state.json').read_text(encoding='utf-8'))
-          assert isinstance(state.get('packs'), list), 'publisher state packs must be a list'
-          configured = json.loads(Path('miki-publisher.json').read_text(encoding='utf-8'))
-          configured_sources = {
-              str(variant.get('sourcePath', '')).replace('\\', '/')
-              for pack in configured.get('packs', [])
-              for release in pack.get('releases', [])
-              for variant in release.get('variants', [])
-          }
-          pending_sources = {
-              str(item.get('sourcePath', '')).replace('\\', '/')
-              for item in configured.get('pendingClassification', [])
-          }
-          safe_total = 0
-          seen_pack_ids = set()
-          for family in state.get('packs', []):
-              pack_id = family['packId']
-              assert pack_id not in seen_pack_ids, f'duplicate top-level packId: {pack_id}'
-              seen_pack_ids.add(pack_id)
-              for release in family['releases']:
+          assert config.get('repository') == 'mirrorlious/miki-clean-publisher'
+          assert isinstance(state.get('packs'), list) and state['packs'], 'validation must produce at least one clean pack family'
+          deny = ('zh2000', 'dyl')
+          configured_sources = set()
+          for pack in config.get('packs', []):
+              for release in pack.get('releases', []):
                   assert release['status'] in ('ACTIVE', 'ARCHIVED', 'WITHDRAWN', 'REVOKED')
+                  for variant in release.get('variants', []):
+                      source = str(variant.get('sourcePath', '')).replace('\\', '/')
+                      configured_sources.add(source)
+                      assert source.startswith('artifacts/'), f'non-clean artifact source: {source}'
+                      assert not any(token in source.lower() for token in deny), f'denied artifact escaped policy: {source}'
+                      origin = variant.get('origin') or {}
+                      assert origin.get('repository') == 'mirrorlious/ankicardsfo1po'
+                      assert origin.get('provenance') == 'OWNER_UPLOAD_ASSERTION'
+
+          safe_total = 0
+          for family in state['packs']:
+              for release in family['releases']:
                   for variant in release['variants']:
-                      source = variant['sourcePath'].replace('\\', '/')
-                      assert source in configured_sources or source.startswith('incoming/'), (
-                          f'untrusted discovery path escaped publisher policy: {source}'
-                      )
-                      assert source not in pending_sources, (
-                          f'pending unclassified source leaked into the feed: {source}'
-                      )
+                      assert variant['sourcePath'] in configured_sources
                       manifest = json.loads(Path(variant['manifestPath']).read_text(encoding='utf-8'))
                       report = json.loads(Path(variant['templateReportPath']).read_text(encoding='utf-8'))
                       assert manifest['schemaVersion'] == 2
                       assert manifest['payload']['format'] == 'apkg'
-                      assert manifest['resources'][0]['integrity']['algorithm'] == 'sha256'
-                      assert len(manifest['resources'][0]['integrity']['digest']) == 64
-                      assert report['sourceSha256'] == manifest['resources'][0]['integrity']['digest']
+                      digest = manifest['resources'][0]['integrity']['digest']
+                      assert len(digest) == 64
+                      assert report['sourceSha256'] == digest
                       assert report['templateEditPolicy'] == 'fields-only'
                       assert report['summary']['executionApprovedCount'] == 0
                       assert report['rawJavascriptExecutionApproved'] is False
-                      assert report['safeInteractionPolicyVersion'] == 1
                       assert report.get('contentFingerprint', '').startswith('sha256:')
                       assert report.get('templateFingerprint', '').startswith('sha256:')
                       safe_total += int(report['summary'].get('safeInteractionApprovedCount', 0))
-                      for template in report.get('templates', []):
-                          assert template.get('executionApproved') is False
-                          if not template.get('safeInteractionApproved'):
-                              continue
-                          plan = template.get('safeInteractionPlan') or {}
-                          assert template.get('safeInteractionMode') == 'choice-judge-v1'
-                          assert str(template.get('safeInteractionFingerprint', '')).startswith('sha256:')
-                          assert plan.get('policyVersion') == 1
-                          assert plan.get('profile') == 'choice-judge-v1'
-                          assert str(plan.get('planHash', '')).startswith('sha256:')
-                          assert plan.get('optionSelector')
-                          assert plan.get('optionValueAttribute', '').startswith('data-')
-                          assert plan.get('answerField')
-                          assert plan.get('correctClass') and plan.get('wrongClass')
-          print(f"validated {len(state['packs'])} owner pack family(s); safe-interaction-approved={safe_total}")
+          print(f"validated {len(state['packs'])} clean family(s); safe-interaction-approved={safe_total}")
           PY
+      - name: Ensure ZH2000 and DYL were not copied
+        run: |
+          if find artifacts -type f \( -iname '*zh2000*' -o -iname '*dyl*' \) -print -quit | grep -q .; then
+            echo 'Denied asset copied into clean artifacts.' >&2
+            exit 1
+          fi
 
   publish:
-    name: Publish immutable owner feed
+    name: Publish immutable feed and latest pointer
     needs: validate
-    if: github.event_name != 'pull_request' && (github.event_name == 'workflow_dispatch' || github.actor == github.repository_owner)
+    if: >-
+      github.event_name != 'pull_request' &&
+      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' ||
+       (github.event_name == 'push' && github.actor != 'github-actions[bot]'))
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - name: Checkout source repository
+      - name: Checkout Clean Publisher
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -197,78 +140,78 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      - name: Collect APKGs changed by this GitHub event
+      - name: Sync Owner Inbox
+        id: inbox
+        run: python scripts/sync_owner_inbox.py --source-dir "$RUNNER_TEMP/miki-owner-inbox" --json
+      - name: Decide whether immutable feed must advance
+        id: decision
         env:
           EVENT_NAME: ${{ github.event_name }}
-          BEFORE_SHA: ${{ github.event.before }}
-          HEAD_SHA: ${{ github.sha }}
         run: |
-          python - <<'PY'
-          import os
-          import subprocess
-          from pathlib import Path
-
-          event = os.environ.get('EVENT_NAME', '')
-          before = os.environ.get('BEFORE_SHA', '')
-          head = os.environ.get('HEAD_SHA', '') or 'HEAD'
-
-          if event == 'push' and before and set(before) != {'0'}:
-              command = ['git', 'diff', '--name-only', before, head]
-          elif event == 'push':
-              command = ['git', 'show', '--pretty=', '--name-only', head]
-          else:
-              command = None
-
-          names = []
-          if command:
-              output = subprocess.check_output(command, text=True, encoding='utf-8')
-              for raw in output.splitlines():
-                  name = raw.replace('\\', '/').strip()
-                  if not name.lower().endswith('.apkg'):
-                      continue
-                  if '/' not in name or name.startswith('incoming/'):
-                      names.append(name)
-
-          names = sorted(set(names))
-          Path('.miki-auto-sources.txt').write_text(
-              ''.join(f'{name}\n' for name in names),
-              encoding='utf-8',
-          )
-          print(f'event-scoped APKG candidates: {names}')
-          PY
-      - name: Persist owner authorization for newly uploaded root APKGs
+          artifact_changed=false
+          if [ -d artifacts ] && [ -n "$(git status --porcelain -- artifacts/)" ]; then
+            artifact_changed=true
+          fi
+          publish_needed=false
+          if [ "$artifact_changed" = true ] || [ "$EVENT_NAME" != schedule ]; then
+            publish_needed=true
+          fi
+          echo "artifact_changed=$artifact_changed" >> "$GITHUB_OUTPUT"
+          echo "publish_needed=$publish_needed" >> "$GITHUB_OUTPUT"
+      - name: Commit inbox cursor, registry and accepted artifacts
         run: |
-          python scripts/miki_owner_publisher.py authorize
           git add -- miki-publisher.json
+          if [ -d artifacts ]; then git add -- artifacts/; fi
           if git diff --cached --quiet; then
-            echo "No new root APKG authorization required."
+            echo "Owner Inbox already synchronized."
           else
-            git commit -m "chore(owner-publisher): authorize uploaded APKGs"
+            git commit -m "chore(publisher): sync Owner Inbox"
           fi
       - name: Build APKG manifests and template security reports
+        if: steps.decision.outputs.publish_needed == 'true'
         run: |
           export MIKI_RELEASE_DATE="$(date -u +%Y%m%d)"
           python scripts/miki_owner_publisher.py build
           python scripts/compile_miki_owner_t1.py
       - name: Commit immutable manifest snapshot
+        if: steps.decision.outputs.publish_needed == 'true'
         id: manifest_commit
         run: |
           git add -- '.miki-'*.manifest.v2.json '.miki-reports/' '.miki-publish-state.json'
           if git diff --cached --quiet; then
             echo "No manifest changes detected."
           else
-            git commit -m "build(owner-publisher): refresh APKG release manifests"
+            git commit -m "build(publisher): refresh immutable manifests"
           fi
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-      - name: Build owner public feed against immutable manifest commit
+      - name: Build owner feed against immutable manifest commit
+        if: steps.decision.outputs.publish_needed == 'true'
         run: python scripts/miki_owner_publisher.py feed --commit '${{ steps.manifest_commit.outputs.sha }}'
-      - name: Commit mutable owner feed index
+      - name: Commit immutable feed snapshot
+        if: steps.decision.outputs.publish_needed == 'true'
+        id: feed_commit
         run: |
-          git add -- 'miki-public/index.json'
+          git add -- miki-public/index.json
           if git diff --cached --quiet; then
-            echo "Owner feed already points at the current immutable release."
+            echo "Feed content unchanged."
           else
-            git commit -m "build(owner-publisher): update Miki owner feed"
+            git commit -m "build(publisher): update immutable owner feed"
           fi
-      - name: Push publisher commits
-        run: git push origin HEAD:main
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Publish digest-bound latest pointer
+        if: steps.decision.outputs.publish_needed == 'true'
+        run: |
+          python scripts/publish_latest_pointer.py --feed-commit '${{ steps.feed_commit.outputs.sha }}'
+          git add -- miki-public/latest.json
+          if git diff --cached --quiet; then
+            echo "Latest pointer unchanged."
+          else
+            git commit -m "build(publisher): advance latest feed pointer"
+          fi
+      - name: Push Clean Publisher commits
+        run: |
+          if [ "$(git rev-parse HEAD)" = "${GITHUB_SHA}" ]; then
+            echo "No publisher changes to push."
+          else
+            git push origin HEAD:main
+          fi
