@@ -17,6 +17,8 @@ import sync_owner_inbox as sync
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "miki-publisher.json"
 CLEAN_ZH2000_PATH = "zh2000v2.apkg"
+ZH2000_PUBLIC_TITLE = "27法硕 ZH2000 基础+进阶"
+ZH2000_PUBLIC_VARIANT_LABEL = "基础+进阶"
 MOTHER_CHILD_PATH = "QY于越刑法母子题v4.5记忆卡片_母子题跳转版.apkg"
 POLITICS_XUTAO_PATH = "27政治xutao强化课阶段测_水墨青总包_五科01史纲_02思修_03马原_04毛中特_05新思想165题.apkg"
 MOTHER_CHILD_COMMIT = "d2d718137426bb693ebdb141c5b7f56c1dbb99cf"
@@ -50,11 +52,11 @@ def parse_filename(path: str) -> dict:
     normalized = normalize_path(path)
     if normalized == CLEAN_ZH2000_PATH:
         return {
-            "title": "27法硕 ZH2000 清洗版",
+            "title": ZH2000_PUBLIC_TITLE,
             "familyKey": "zh2000-clean",
             "packId": "zh2000-clean",
             "variantId": "clean",
-            "variantLabel": "清洗版",
+            "variantLabel": ZH2000_PUBLIC_VARIANT_LABEL,
             "explicitVersion": "",
         }
     if normalized == MOTHER_CHILD_PATH:
@@ -128,6 +130,19 @@ def sanitize_public_metadata(config_path: Path) -> None:
         if cleaned != description:
             pack["description"] = cleaned
             changed = True
+        if str(pack.get("packId") or "") == "zh2000-clean":
+            if pack.get("title") != ZH2000_PUBLIC_TITLE:
+                pack["title"] = ZH2000_PUBLIC_TITLE
+                changed = True
+            expected_description = f"{ZH2000_PUBLIC_TITLE}。"
+            if pack.get("description") != expected_description:
+                pack["description"] = expected_description
+                changed = True
+            for release in pack.get("releases", []):
+                for variant in release.get("variants", []):
+                    if str(variant.get("variantId") or "") == "clean" and variant.get("label") != ZH2000_PUBLIC_VARIANT_LABEL:
+                        variant["label"] = ZH2000_PUBLIC_VARIANT_LABEL
+                        changed = True
     if changed:
         config_path.write_text(
             json.dumps(config, ensure_ascii=False, indent=2) + "\n",
