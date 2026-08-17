@@ -22,7 +22,9 @@ raw JavaScript execution by itself.
 from __future__ import annotations
 
 import json
+import os
 import sys
+from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 
 import publish_miki_owner_pack as engine
@@ -146,6 +148,32 @@ def authorize_command() -> None:
         print("No new unclassified root APKG upload.")
 
 
+def engine_date_key_for_calendar_date(date_key: str) -> str:
+    """Compensate for the legacy engine's DD/MM slice order.
+
+    The public contract is YYYY.MM.DD. The underlying engine currently renders
+    date_key as YYYY.DD.MM, so pass YYYYDDMM until that legacy implementation is
+    retired. Keep MIKI_RELEASE_DATE itself documented and supplied as YYYYMMDD.
+    """
+    value = str(date_key or "").strip()
+    if len(value) != 8 or not value.isdigit():
+        raise SystemExit("MIKI_RELEASE_DATE must be YYYYMMDD")
+    return f"{value[:4]}{value[6:8]}{value[4:6]}"
+
+
+def build_with_public_calendar_date(config: dict) -> None:
+    calendar_date_key = os.environ.get("MIKI_RELEASE_DATE") or datetime.now(timezone.utc).strftime("%Y%m%d")
+    previous = os.environ.get("MIKI_RELEASE_DATE")
+    os.environ["MIKI_RELEASE_DATE"] = engine_date_key_for_calendar_date(calendar_date_key)
+    try:
+        engine.build_with_config(config)
+    finally:
+        if previous is None:
+            os.environ.pop("MIKI_RELEASE_DATE", None)
+        else:
+            os.environ["MIKI_RELEASE_DATE"] = previous
+
+
 def main() -> None:
     if len(sys.argv) > 1 and sys.argv[1] == "authorize":
         if len(sys.argv) != 2:
@@ -158,7 +186,7 @@ def main() -> None:
         engine.validate_config(config)
         config = inject_incoming_lane(config)
         engine.validate_config(config)
-        engine.build_with_config(config)
+        build_with_public_calendar_date(config)
         return
 
     if len(sys.argv) > 1 and sys.argv[1] == "feed":
