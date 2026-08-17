@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import json
+import tempfile
 import unittest
+from pathlib import Path
 
 import sync_owner_inbox_safe as safe
 
@@ -28,7 +31,36 @@ class CleanZh2000PolicyTest(unittest.TestCase):
         self.assertEqual(parsed["variantId"], "clean")
         self.assertEqual(parsed["variantLabel"], "清洗版")
 
-    def test_non_zh_path_keeps_generic_parser(self):
+    def test_mother_child_backfill_gets_stable_identity(self):
+        parsed = safe.parse_filename(safe.MOTHER_CHILD_PATH)
+        self.assertEqual(parsed["title"], "QY 于越刑法母子题")
+        self.assertEqual(parsed["packId"], "qy-lsat-criminal-law-parent-child")
+        self.assertEqual(parsed["variantId"], "linked")
+        self.assertEqual(parsed["explicitVersion"], "4.5")
+
+    def test_politics_backfill_gets_stable_identity(self):
+        parsed = safe.parse_filename(safe.POLITICS_XUTAO_PATH)
+        self.assertEqual(parsed["title"], "27政治徐涛强化课阶段测")
+        self.assertEqual(parsed["packId"], "postgrad-politics-xutao-stage-tests")
+        self.assertEqual(parsed["variantId"], "shuimo")
+
+    def test_public_metadata_hides_internal_owner_copy(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "miki-publisher.json"
+            path.write_text(json.dumps({
+                "packs": [{
+                    "title": "测试卡组",
+                    "author": "Owner 上传",
+                    "description": "测试卡组，由 Owner Inbox 自动静态审计并发布。",
+                }]
+            }, ensure_ascii=False), encoding="utf-8")
+            safe.sanitize_public_metadata(path)
+            pack = json.loads(path.read_text(encoding="utf-8"))["packs"][0]
+            self.assertEqual(pack["author"], "社区分享")
+            self.assertNotIn("Owner", pack["description"])
+            self.assertNotIn("Inbox", pack["description"])
+
+    def test_non_special_path_keeps_generic_parser(self):
         parsed = safe.parse_filename("2027法硕法基强化题-水墨青.apkg")
         self.assertEqual(parsed["title"], "2027法硕法基强化题")
         self.assertEqual(parsed["variantId"], "shuimo")
