@@ -44,6 +44,25 @@ class CleanZh2000PolicyTest(unittest.TestCase):
         self.assertEqual(parsed["packId"], "postgrad-politics-xutao-stage-tests")
         self.assertEqual(parsed["variantId"], "shuimo")
 
+    def test_approved_backfills_are_added_once_and_skip_published_origins(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "miki-publisher.json"
+            path.write_text(json.dumps({
+                "sourceInbox": {"bootstrap": []},
+                "packs": [{
+                    "releases": [{
+                        "variants": [{"origin": {"path": safe.POLITICS_XUTAO_PATH}}]
+                    }]
+                }],
+            }, ensure_ascii=False), encoding="utf-8")
+            safe.ensure_approved_backfills(path)
+            config = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(len(config["sourceInbox"]["bootstrap"]), 1)
+            self.assertEqual(config["sourceInbox"]["bootstrap"][0]["sourcePath"], safe.MOTHER_CHILD_PATH)
+            safe.ensure_approved_backfills(path)
+            config = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(len(config["sourceInbox"]["bootstrap"]), 1)
+
     def test_public_metadata_hides_internal_owner_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "miki-publisher.json"
