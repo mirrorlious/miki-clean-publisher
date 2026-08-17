@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "repository": "mirrorlious/miki-clean-publisher",
   "publisher": "mirrorlious",
-  "generatedAt": "2026-08-17T04:26:31.188746+00:00",
+  "generatedAt": "2026-08-17T04:56:19.176761+00:00",
   "packs": [
     {
       "packId": "owner-pack-6aa5b38bbba0",
@@ -113,7 +113,7 @@
             {
               "packId": "zh2000-clean",
               "variantId": "clean",
-              "label": "清洗版",
+              "label": "基础+进阶",
               "sourcePath": "artifacts/zh2000-clean/v1/clean-e642031cf170.apkg",
               "sourceSha256": "e642031cf1703ce7157d7f3dd3820f7e23a8e51d262a40ea50619434d16c69ff",
               "sourceSizeBytes": 1143561,
@@ -126,8 +126,8 @@
               "deckCount": 281,
               "version": "2026.17.08+e642031c",
               "resourceVersion": "zh2000-clean-clean-e642031cf170-1143561",
-              "title": "27法硕 ZH2000 清洗版",
-              "description": "27法硕 ZH2000 清洗版。",
+              "title": "27法硕 ZH2000 基础+进阶",
+              "description": "27法硕 ZH2000 基础+进阶。",
               "subject": "",
               "license": "仅供个人学习",
               "author": "社区分享",
