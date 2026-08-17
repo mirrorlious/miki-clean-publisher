@@ -25,11 +25,11 @@ class CleanZh2000PolicyTest(unittest.TestCase):
 
     def test_clean_path_gets_stable_safe_identity(self):
         parsed = safe.parse_filename("zh2000v2.apkg")
-        self.assertEqual(parsed["title"], "27法硕 ZH2000 清洗版")
+        self.assertEqual(parsed["title"], "27法硕 ZH2000 基础+进阶")
         self.assertEqual(parsed["familyKey"], "zh2000-clean")
         self.assertEqual(parsed["packId"], "zh2000-clean")
         self.assertEqual(parsed["variantId"], "clean")
-        self.assertEqual(parsed["variantLabel"], "清洗版")
+        self.assertEqual(parsed["variantLabel"], "基础+进阶")
 
     def test_mother_child_backfill_gets_stable_identity(self):
         parsed = safe.parse_filename(safe.MOTHER_CHILD_PATH)
@@ -78,6 +78,27 @@ class CleanZh2000PolicyTest(unittest.TestCase):
             self.assertEqual(pack["author"], "社区分享")
             self.assertNotIn("Owner", pack["description"])
             self.assertNotIn("Inbox", pack["description"])
+
+    def test_public_metadata_renames_existing_zh2000_pack(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "miki-publisher.json"
+            path.write_text(json.dumps({
+                "packs": [{
+                    "packId": "zh2000-clean",
+                    "title": "27法硕 ZH2000 清洗版",
+                    "description": "27法硕 ZH2000 清洗版。",
+                    "author": "社区分享",
+                    "releases": [{
+                        "variants": [{"variantId": "clean", "label": "清洗版"}],
+                    }],
+                }]
+            }, ensure_ascii=False), encoding="utf-8")
+            safe.sanitize_public_metadata(path)
+            pack = json.loads(path.read_text(encoding="utf-8"))["packs"][0]
+            self.assertEqual(pack["title"], "27法硕 ZH2000 基础+进阶")
+            self.assertEqual(pack["description"], "27法硕 ZH2000 基础+进阶。")
+            self.assertEqual(pack["releases"][0]["variants"][0]["label"], "基础+进阶")
+            self.assertNotIn("清洗版", json.dumps(pack, ensure_ascii=False))
 
     def test_non_special_path_keeps_generic_parser(self):
         parsed = safe.parse_filename("2027法硕法基强化题-水墨青.apkg")
