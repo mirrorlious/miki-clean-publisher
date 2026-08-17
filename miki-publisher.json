@@ -15,7 +15,7 @@
   "sourceInbox": {
     "repository": "mirrorlious/ankicardsfo1po",
     "branch": "main",
-    "lastSeenCommit": "b3c632014ddc23e14a3f4124ca7721a3c60f8e69",
+    "lastSeenCommit": "d3cc3768b6bb8e952a5759a22acb91b91ef2a972",
     "bootstrap": [],
     "denyTokens": [
       "dyl"
@@ -62,6 +62,98 @@
                 "familyKey": "2027法硕法基强化题",
                 "contentFingerprint": "sha256:61cb5421d2598ba51cec8a07f3ef3545b05d0de8f26451023669294f5cc1b3fc",
                 "templateFingerprint": "sha256:9b74cbaff1c04daa36bdfaea84e753f8740ee2ca6069d473714028e0d067b7f6"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "packId": "owner-pack-94b82faa40c4",
+      "title": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)",
+      "description": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)，由 Owner Inbox 自动静态审计并发布。",
+      "author": "Owner 上传",
+      "license": "仅供个人学习",
+      "subject": "",
+      "usageHint": "加入后可在 Miki 公共池中安装。",
+      "autoIdentity": {
+        "familyKey": "qy27法硕刑法强化题330题答案解析补全版v2排序清理1",
+        "createdBy": "OWNER_INBOX_AUTO_PUBLISH_V1"
+      },
+      "currentReleaseId": "v1",
+      "releases": [
+        {
+          "releaseId": "v1",
+          "displayVersion": "1",
+          "status": "ACTIVE",
+          "defaultVariantId": "original",
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:284961df4e6af4b356853ec794417f7ca95799c8bfd1c06c71f2d8402058533e",
+            "templateFingerprint": "sha256:2e10eb83a4d457e0dcae783d573415cb3d742ac7d13f542b04e4ed0a05f4f24a",
+            "autoDecision": "NEW_FAMILY",
+            "basis": "No existing semantic-content or deterministic-family-key match."
+          },
+          "variants": [
+            {
+              "variantId": "original",
+              "label": "原版",
+              "sourcePath": "artifacts/owner-pack-94b82faa40c4/v1/original-230e5dde8c00.apkg",
+              "origin": {
+                "repository": "mirrorlious/ankicardsfo1po",
+                "commit": "d6f5a8a616f7e10ad3fe84873f43b3f038ae66c8",
+                "path": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1).apkg",
+                "provenance": "OWNER_UPLOAD_ASSERTION"
+              },
+              "autoIdentity": {
+                "familyKey": "qy27法硕刑法强化题330题答案解析补全版v2排序清理1",
+                "contentFingerprint": "sha256:284961df4e6af4b356853ec794417f7ca95799c8bfd1c06c71f2d8402058533e",
+                "templateFingerprint": "sha256:2e10eb83a4d457e0dcae783d573415cb3d742ac7d13f542b04e4ed0a05f4f24a"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "packId": "zh2000-clean",
+      "title": "27法硕 ZH2000 清洗版",
+      "description": "27法硕 ZH2000 清洗版，由 Owner Inbox 自动静态审计并发布。",
+      "author": "Owner 上传",
+      "license": "仅供个人学习",
+      "subject": "",
+      "usageHint": "加入后可在 Miki 公共池中安装。",
+      "autoIdentity": {
+        "familyKey": "zh2000-clean",
+        "createdBy": "OWNER_INBOX_AUTO_PUBLISH_V1"
+      },
+      "currentReleaseId": "v1",
+      "releases": [
+        {
+          "releaseId": "v1",
+          "displayVersion": "1",
+          "status": "ACTIVE",
+          "defaultVariantId": "clean",
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:f5c24964b205da6ea759ef9d15da30be0978b542ceb9b535980c1b17a04fd034",
+            "templateFingerprint": "sha256:f1d863dbeaea6570dd79a55b73801422dcf244c902f14e5615144d7e726272f9",
+            "autoDecision": "NEW_FAMILY",
+            "basis": "No existing semantic-content or deterministic-family-key match."
+          },
+          "variants": [
+            {
+              "variantId": "clean",
+              "label": "清洗版",
+              "sourcePath": "artifacts/zh2000-clean/v1/clean-e642031cf170.apkg",
+              "origin": {
+                "repository": "mirrorlious/ankicardsfo1po",
+                "commit": "d6f5a8a616f7e10ad3fe84873f43b3f038ae66c8",
+                "path": "zh2000v2.apkg",
+                "provenance": "OWNER_UPLOAD_ASSERTION"
+              },
+              "autoIdentity": {
+                "familyKey": "zh2000-clean",
+                "contentFingerprint": "sha256:f5c24964b205da6ea759ef9d15da30be0978b542ceb9b535980c1b17a04fd034",
+                "templateFingerprint": "sha256:f1d863dbeaea6570dd79a55b73801422dcf244c902f14e5615144d7e726272f9"
               }
             }
           ]
