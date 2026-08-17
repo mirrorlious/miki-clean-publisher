@@ -48,6 +48,7 @@ jobs:
           python -m py_compile scripts/compile_miki_owner_t1.py
           python -m py_compile scripts/audit_apkg_identity.py
           python -m py_compile scripts/sync_owner_inbox.py
+          python -m py_compile scripts/sync_owner_inbox_safe.py
           python -m py_compile scripts/publish_latest_pointer.py
       - name: Run publisher unit tests
         run: >-
@@ -55,10 +56,11 @@ jobs:
           scripts/test_miki_owner_publisher.py
           scripts/test_miki_owner_t1.py
           scripts/test_sync_owner_inbox.py
+          scripts/test_sync_owner_inbox_safe.py
           scripts/test_publish_latest_pointer.py
       - name: Stage Owner Inbox candidates in validation workspace
         id: inbox
-        run: python scripts/sync_owner_inbox.py --source-dir "$RUNNER_TEMP/miki-owner-inbox" --json
+        run: python scripts/sync_owner_inbox_safe.py --source-dir "$RUNNER_TEMP/miki-owner-inbox" --json
       - name: Build manifests and security reports without publishing
         run: |
           export MIKI_RELEASE_DATE="$(date -u +%Y%m%d)"
@@ -74,7 +76,8 @@ jobs:
           state = json.loads(Path('.miki-publish-state.json').read_text(encoding='utf-8'))
           assert config.get('repository') == 'mirrorlious/miki-clean-publisher'
           assert isinstance(state.get('packs'), list) and state['packs'], 'validation must produce at least one clean pack family'
-          deny = ('zh2000', 'dyl')
+          deny_artifact_tokens = ('dyl',)
+          clean_zh_path = 'zh2000v2.apkg'
           configured_sources = set()
           for pack in config.get('packs', []):
               for release in pack.get('releases', []):
@@ -83,10 +86,13 @@ jobs:
                       source = str(variant.get('sourcePath', '')).replace('\\', '/')
                       configured_sources.add(source)
                       assert source.startswith('artifacts/'), f'non-clean artifact source: {source}'
-                      assert not any(token in source.lower() for token in deny), f'denied artifact escaped policy: {source}'
+                      assert not any(token in source.lower() for token in deny_artifact_tokens), f'denied artifact escaped policy: {source}'
                       origin = variant.get('origin') or {}
                       assert origin.get('repository') == 'mirrorlious/ankicardsfo1po'
                       assert origin.get('provenance') == 'OWNER_UPLOAD_ASSERTION'
+                      origin_path = str(origin.get('path') or '').replace('\\', '/')
+                      if 'zh2000' in origin_path.casefold():
+                          assert origin_path == clean_zh_path, f'unapproved ZH2000 source escaped policy: {origin_path}'
 
           safe_total = 0
           for family in state['packs']:
@@ -108,10 +114,10 @@ jobs:
                       safe_total += int(report['summary'].get('safeInteractionApprovedCount', 0))
           print(f"validated {len(state['packs'])} clean family(s); safe-interaction-approved={safe_total}")
           PY
-      - name: Ensure ZH2000 and DYL were not copied
+      - name: Ensure legacy ZH2000 and DYL were not copied
         run: |
-          if find artifacts -type f \( -iname '*zh2000*' -o -iname '*dyl*' \) -print -quit | grep -q .; then
-            echo 'Denied asset copied into clean artifacts.' >&2
+          if find artifacts -type f \( -iname '*ZH2000_apkg*' -o -iname '*dyl*' \) -print -quit | grep -q .; then
+            echo 'Denied legacy asset copied into clean artifacts.' >&2
             exit 1
           fi
 
@@ -142,7 +148,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Sync Owner Inbox
         id: inbox
-        run: python scripts/sync_owner_inbox.py --source-dir "$RUNNER_TEMP/miki-owner-inbox" --json
+        run: python scripts/sync_owner_inbox_safe.py --source-dir "$RUNNER_TEMP/miki-owner-inbox" --json
       - name: Decide whether immutable feed must advance
         id: decision
         env:
