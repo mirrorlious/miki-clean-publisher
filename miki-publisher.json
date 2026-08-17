@@ -116,8 +116,8 @@
     },
     {
       "packId": "zh2000-clean",
-      "title": "27法硕 ZH2000 清洗版",
-      "description": "27法硕 ZH2000 清洗版。",
+      "title": "27法硕 ZH2000 基础+进阶",
+      "description": "27法硕 ZH2000 基础+进阶。",
       "author": "社区分享",
       "license": "仅供个人学习",
       "subject": "",
@@ -142,7 +142,7 @@
           "variants": [
             {
               "variantId": "clean",
-              "label": "清洗版",
+              "label": "基础+进阶",
               "sourcePath": "artifacts/zh2000-clean/v1/clean-e642031cf170.apkg",
               "origin": {
                 "repository": "mirrorlious/ankicardsfo1po",
