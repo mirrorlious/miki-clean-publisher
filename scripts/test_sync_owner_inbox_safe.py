@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
+import miki_owner_publisher as publisher_policy
 import sync_owner_inbox_safe as safe
 
 
@@ -104,6 +107,31 @@ class CleanZh2000PolicyTest(unittest.TestCase):
         parsed = safe.parse_filename("2027法硕法基强化题-水墨青.apkg")
         self.assertEqual(parsed["title"], "2027法硕法基强化题")
         self.assertEqual(parsed["variantId"], "shuimo")
+
+
+class PublicVersionDatePolicyTest(unittest.TestCase):
+    def test_calendar_date_is_rendered_as_yyyy_mm_dd(self):
+        engine_date_key = publisher_policy.engine_date_key_for_calendar_date("20260817")
+        self.assertEqual(engine_date_key, "20261708")
+        rendered = f"{engine_date_key[:4]}.{engine_date_key[6:8]}.{engine_date_key[4:6]}"
+        self.assertEqual(rendered, "2026.08.17")
+
+    def test_build_temporarily_normalizes_and_restores_release_date(self):
+        observed = []
+
+        def capture(_config):
+            observed.append(os.environ.get("MIKI_RELEASE_DATE"))
+
+        with patch.dict(os.environ, {"MIKI_RELEASE_DATE": "20260817"}, clear=False), \
+             patch.object(publisher_policy.engine, "build_with_config", side_effect=capture):
+            publisher_policy.build_with_public_calendar_date({})
+            self.assertEqual(os.environ["MIKI_RELEASE_DATE"], "20260817")
+
+        self.assertEqual(observed, ["20261708"])
+
+    def test_invalid_release_date_fails_closed(self):
+        with self.assertRaises(SystemExit):
+            publisher_policy.engine_date_key_for_calendar_date("2026-08-17")
 
 
 if __name__ == "__main__":
