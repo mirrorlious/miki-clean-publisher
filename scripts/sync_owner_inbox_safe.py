@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Fail-closed Owner Inbox policy wrapper for Clean Publisher.
 
-The generic sync engine stays reusable. This wrapper adds the production-only
-source-name policy: DYL remains denied by the generic token gate, while ZH2000
-is accepted only through the Owner-designated clean path `zh2000v2.apkg`.
+The generic sync engine stays reusable. This wrapper adds production-only
+source-name policy and stable identities for explicitly approved special lanes.
 """
 from __future__ import annotations
 
@@ -17,7 +16,10 @@ import sync_owner_inbox as sync
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "miki-publisher.json"
 CLEAN_ZH2000_PATH = "zh2000v2.apkg"
+MOTHER_CHILD_PATH = "QY于越刑法母子题v4.5记忆卡片_母子题跳转版.apkg"
+POLITICS_XUTAO_PATH = "27政治xutao强化课阶段测_水墨青总包_五科01史纲_02思修_03马原_04毛中特_05新思想165题.apkg"
 _ORIGINAL_PARSE_FILENAME = sync.parse_filename
+_FORBIDDEN_DESCRIPTION = "由 Owner Inbox 自动静态审计并发布。"
 
 
 def normalize_path(value: str) -> str:
@@ -48,7 +50,45 @@ def parse_filename(path: str) -> dict:
             "variantLabel": "清洗版",
             "explicitVersion": "",
         }
+    if normalized == MOTHER_CHILD_PATH:
+        return {
+            "title": "QY 于越刑法母子题",
+            "familyKey": "qy-yuyue-criminal-law-parent-child",
+            "packId": "qy-lsat-criminal-law-parent-child",
+            "variantId": "linked",
+            "variantLabel": "母子题跳转版",
+            "explicitVersion": "4.5",
+        }
+    if normalized == POLITICS_XUTAO_PATH:
+        return {
+            "title": "27政治徐涛强化课阶段测",
+            "familyKey": "postgrad-politics-xutao-stage-tests",
+            "packId": "postgrad-politics-xutao-stage-tests",
+            "variantId": "shuimo",
+            "variantLabel": "水墨青",
+            "explicitVersion": "2027",
+        }
     return _ORIGINAL_PARSE_FILENAME(path)
+
+
+def sanitize_public_metadata(config_path: Path) -> None:
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    changed = False
+    for pack in config.get("packs", []):
+        if str(pack.get("author") or "").strip() in {"Owner", "Owner 上传", "Owner Inbox"}:
+            pack["author"] = "社区分享"
+            changed = True
+        description = str(pack.get("description") or "")
+        cleaned = description.replace(f"，{_FORBIDDEN_DESCRIPTION}", "。")
+        cleaned = cleaned.replace(_FORBIDDEN_DESCRIPTION, "").strip()
+        if cleaned != description:
+            pack["description"] = cleaned
+            changed = True
+    if changed:
+        config_path.write_text(
+            json.dumps(config, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
 
 
 def candidate_paths(config_path: Path, source_dir: Path) -> list[str]:
@@ -91,6 +131,7 @@ def main() -> None:
 
     sync.parse_filename = parse_filename
     result = sync.sync(config_path, root, source_dir)
+    sanitize_public_metadata(config_path)
     sync.emit_outputs(result)
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
