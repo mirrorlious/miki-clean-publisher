@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "packId": "qy-lsat-criminal-law-parent-child",
+  "releaseId": "v1",
+  "variantId": "linked",
+  "sourcePath": "artifacts/qy-lsat-criminal-law-parent-child/v1/linked-2c5a932fdaa0.apkg",
+  "sourceSha256": "2c5a932fdaa0ace9868835a2aab488412a745049f8c88ca3f16bb1d745b27083",
+  "sourceSizeBytes": 780560,
+  "collection": "collection.anki2",
+  "contentFingerprint": "sha256:2ccd363c93f83152b0eecb6eaaee2fb5737d7759c5573f3dd70dfb659a3eab11",
+  "templateFingerprint": "sha256:a987fb31a04e60ca9271f1861385e869a9a4b8e9b76030edb297ac5d77bdb603",
+  "templateEditPolicy": "fields-only",
+  "javascriptPolicy": "fingerprint-gated-disabled-by-default",
+  "templates": [
+    {
+      "modelId": "1786620000001",
+      "modelName": "刑法母子题｜题组关联版",
+      "cardOrd": 0,
+      "templateName": "母子题",
+      "fieldNames": [
+        "QuestionID",
+        "OriginalQID",
+        "Question",
+        "Options",
+        "Answer",
+        "ExamPoint",
+        "Analysis",
+        "Extension",
+        "QType",
+        "Role",
+        "RoleIndex",
+        "RoleCount",
+        "MotherCount",
+        "ChildCount",
+        "GroupID",
+        "GroupTitle",
+        "ChapterID",
+        "ChapterTitle",
+        "PackStats",
+        "MapNodePath",
+        "MindMapContext",
+        "SourceStatus",
+        "GroupMapHtml",
+        "ExamYear",
+        "ExamTrack",
+        "ExamNo",
+        "MetaBadgesHtml"
+      ],
+      "fingerprint": "sha256:71791d36d8052d820367f87318f3ca9fa59c17411d8f67a4880d871a0a00b6f1",
+      "executableSourceCount": 2,
+      "interactionCandidate": "blocked",
+      "blockers": [
+        "dynamic-code"
+      ],
+      "executionApproved": false
+    }
+  ],
+  "summary": {
+    "templateCount": 1,
+    "javascriptTemplateCount": 1,
+    "t1CandidateCount": 0,
+    "blockedTemplateCount": 1,
+    "executionApprovedCount": 0
+  }
+}

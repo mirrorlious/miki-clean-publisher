@@ -1,12 +1,12 @@
 {
   "schemaVersion": 2,
-  "packId": "owner-pack-6aa5b38bbba0",
+  "packId": "postgrad-politics-xutao-stage-tests",
   "releaseId": "v1",
   "variantId": "shuimo",
-  "title": "2027法硕法基强化题",
-  "description": "2027法硕法基强化题。",
-  "version": "2026.17.08+1fa43b73",
-  "resourceVersion": "owner-pack-6aa5b38bbba0-shuimo-1fa43b734795-137221",
+  "title": "27政治徐涛强化课阶段测",
+  "description": "27政治徐涛强化课阶段测。",
+  "version": "2026.17.08+c2eb6fa8",
+  "resourceVersion": "postgrad-politics-xutao-stage-tests-shuimo-c2eb6fa8174a-79491",
   "payload": {
     "format": "apkg",
     "entryResourceIds": [
@@ -18,9 +18,9 @@
     "renderEngine": "anki-core-v1"
   },
   "counts": {
-    "sourceCardCount": 180,
-    "finalCardCount": 180,
-    "deckCount": 3,
+    "sourceCardCount": 165,
+    "finalCardCount": 165,
+    "deckCount": 5,
     "duplicateCardCountRemoved": 0,
     "uniqueKnowledgeMapCount": 0
   },
@@ -28,12 +28,12 @@
     {
       "id": "source-apkg",
       "role": "apkg",
-      "path": "artifacts/owner-pack-6aa5b38bbba0/v1/shuimo-1fa43b734795.apkg",
+      "path": "artifacts/postgrad-politics-xutao-stage-tests/v1/shuimo-c2eb6fa8174a.apkg",
       "mediaType": "application/octet-stream",
-      "sizeBytes": 137221,
+      "sizeBytes": 79491,
       "integrity": {
         "algorithm": "sha256",
-        "digest": "1fa43b7347956021a3e28d3e7cb9d1988d06da387db1ec7c3711b99ee4dc0a1d"
+        "digest": "c2eb6fa8174ad7ab602cd42960e7580b9fa4afa791fb98934f3a709426132956"
       },
       "cachePolicy": "immutable"
     }

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "repository": "mirrorlious/miki-clean-publisher",
   "publisher": "mirrorlious",
-  "generatedAt": "2026-08-17T00:11:46.198916+00:00",
+  "generatedAt": "2026-08-17T04:26:31.188746+00:00",
   "packs": [
     {
       "packId": "owner-pack-6aa5b38bbba0",
@@ -37,10 +37,10 @@
               "version": "2026.17.08+1fa43b73",
               "resourceVersion": "owner-pack-6aa5b38bbba0-shuimo-1fa43b734795-137221",
               "title": "2027法硕法基强化题",
-              "description": "2027法硕法基强化题，由 Owner Inbox 自动静态审计并发布。",
+              "description": "2027法硕法基强化题。",
               "subject": "",
               "license": "仅供个人学习",
-              "author": "Owner 上传",
+              "author": "社区分享",
               "usageHint": "加入后可在 Miki 公共池中安装。",
               "t1CandidateCount": 0,
               "blockedTemplateCount": 0
@@ -82,10 +82,10 @@
               "version": "2026.17.08+230e5dde",
               "resourceVersion": "owner-pack-94b82faa40c4-original-230e5dde8c00-143984",
               "title": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)",
-              "description": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)，由 Owner Inbox 自动静态审计并发布。",
+              "description": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)。",
               "subject": "",
               "license": "仅供个人学习",
-              "author": "Owner 上传",
+              "author": "社区分享",
               "usageHint": "加入后可在 Miki 公共池中安装。",
               "t1CandidateCount": 0,
               "blockedTemplateCount": 0
@@ -127,13 +127,103 @@
               "version": "2026.17.08+e642031c",
               "resourceVersion": "zh2000-clean-clean-e642031cf170-1143561",
               "title": "27法硕 ZH2000 清洗版",
-              "description": "27法硕 ZH2000 清洗版，由 Owner Inbox 自动静态审计并发布。",
+              "description": "27法硕 ZH2000 清洗版。",
               "subject": "",
               "license": "仅供个人学习",
-              "author": "Owner 上传",
+              "author": "社区分享",
               "usageHint": "加入后可在 Miki 公共池中安装。",
               "t1CandidateCount": 0,
               "blockedTemplateCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "packId": "qy-lsat-criminal-law-parent-child",
+      "currentReleaseId": "v1",
+      "releases": [
+        {
+          "releaseId": "v1",
+          "displayVersion": "4.5",
+          "status": "ACTIVE",
+          "defaultVariantId": "linked",
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:2ccd363c93f83152b0eecb6eaaee2fb5737d7759c5573f3dd70dfb659a3eab11",
+            "templateFingerprint": "sha256:a987fb31a04e60ca9271f1861385e869a9a4b8e9b76030edb297ac5d77bdb603",
+            "autoDecision": "NEW_FAMILY",
+            "basis": "No existing semantic-content or deterministic-family-key match."
+          },
+          "variants": [
+            {
+              "packId": "qy-lsat-criminal-law-parent-child",
+              "variantId": "linked",
+              "label": "母子题跳转版",
+              "sourcePath": "artifacts/qy-lsat-criminal-law-parent-child/v1/linked-2c5a932fdaa0.apkg",
+              "sourceSha256": "2c5a932fdaa0ace9868835a2aab488412a745049f8c88ca3f16bb1d745b27083",
+              "sourceSizeBytes": 780560,
+              "contentFingerprint": "sha256:2ccd363c93f83152b0eecb6eaaee2fb5737d7759c5573f3dd70dfb659a3eab11",
+              "templateFingerprint": "sha256:a987fb31a04e60ca9271f1861385e869a9a4b8e9b76030edb297ac5d77bdb603",
+              "manifestPath": ".miki-qy-lsat-criminal-law-parent-child-linked.manifest.v2.json",
+              "templateReportPath": ".miki-reports/qy-lsat-criminal-law-parent-child-linked.json",
+              "cardCount": 861,
+              "noteCount": 861,
+              "deckCount": 86,
+              "version": "2026.17.08+2c5a932f",
+              "resourceVersion": "qy-lsat-criminal-law-parent-child-linked-2c5a932fdaa0-780560",
+              "title": "QY 于越刑法母子题",
+              "description": "QY 于越刑法母子题。",
+              "subject": "",
+              "license": "仅供个人学习",
+              "author": "社区分享",
+              "usageHint": "加入后可在 Miki 公共池中安装。",
+              "t1CandidateCount": 0,
+              "blockedTemplateCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "packId": "postgrad-politics-xutao-stage-tests",
+      "currentReleaseId": "v1",
+      "releases": [
+        {
+          "releaseId": "v1",
+          "displayVersion": "2027",
+          "status": "ACTIVE",
+          "defaultVariantId": "shuimo",
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:c4d139d33efcb65d7a396f4b7a72623796e8fe79e9294156951cb30604247871",
+            "templateFingerprint": "sha256:07b9e13f8bf49d7f0ee78c8f661240391eef048aa3dea5dce7e12d867e6610c3",
+            "autoDecision": "NEW_FAMILY",
+            "basis": "No existing semantic-content or deterministic-family-key match."
+          },
+          "variants": [
+            {
+              "packId": "postgrad-politics-xutao-stage-tests",
+              "variantId": "shuimo",
+              "label": "水墨青",
+              "sourcePath": "artifacts/postgrad-politics-xutao-stage-tests/v1/shuimo-c2eb6fa8174a.apkg",
+              "sourceSha256": "c2eb6fa8174ad7ab602cd42960e7580b9fa4afa791fb98934f3a709426132956",
+              "sourceSizeBytes": 79491,
+              "contentFingerprint": "sha256:c4d139d33efcb65d7a396f4b7a72623796e8fe79e9294156951cb30604247871",
+              "templateFingerprint": "sha256:07b9e13f8bf49d7f0ee78c8f661240391eef048aa3dea5dce7e12d867e6610c3",
+              "manifestPath": ".miki-postgrad-politics-xutao-stage-tests-shuimo.manifest.v2.json",
+              "templateReportPath": ".miki-reports/postgrad-politics-xutao-stage-tests-shuimo.json",
+              "cardCount": 165,
+              "noteCount": 165,
+              "deckCount": 5,
+              "version": "2026.17.08+c2eb6fa8",
+              "resourceVersion": "postgrad-politics-xutao-stage-tests-shuimo-c2eb6fa8174a-79491",
+              "title": "27政治徐涛强化课阶段测",
+              "description": "27政治徐涛强化课阶段测。",
+              "subject": "",
+              "license": "仅供个人学习",
+              "author": "社区分享",
+              "usageHint": "加入后可在 Miki 公共池中安装。",
+              "t1CandidateCount": 0,
+              "blockedTemplateCount": 0
             }
           ]
         }

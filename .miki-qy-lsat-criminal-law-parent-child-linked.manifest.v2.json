@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 2,
+  "packId": "qy-lsat-criminal-law-parent-child",
+  "releaseId": "v1",
+  "variantId": "linked",
+  "title": "QY 于越刑法母子题",
+  "description": "QY 于越刑法母子题。",
+  "version": "2026.17.08+2c5a932f",
+  "resourceVersion": "qy-lsat-criminal-law-parent-child-linked-2c5a932fdaa0-780560",
+  "payload": {
+    "format": "apkg",
+    "entryResourceIds": [
+      "source-apkg"
+    ]
+  },
+  "runtime": {
+    "contentFormat": "anki",
+    "renderEngine": "anki-core-v1"
+  },
+  "counts": {
+    "sourceCardCount": 861,
+    "finalCardCount": 861,
+    "deckCount": 86,
+    "duplicateCardCountRemoved": 0,
+    "uniqueKnowledgeMapCount": 0
+  },
+  "resources": [
+    {
+      "id": "source-apkg",
+      "role": "apkg",
+      "path": "artifacts/qy-lsat-criminal-law-parent-child/v1/linked-2c5a932fdaa0.apkg",
+      "mediaType": "application/octet-stream",
+      "sizeBytes": 780560,
+      "integrity": {
+        "algorithm": "sha256",
+        "digest": "2c5a932fdaa0ace9868835a2aab488412a745049f8c88ca3f16bb1d745b27083"
+      },
+      "cachePolicy": "immutable"
+    }
+  ]
+}
