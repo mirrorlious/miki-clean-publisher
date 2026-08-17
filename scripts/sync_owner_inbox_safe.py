@@ -2,7 +2,8 @@
 """Fail-closed Owner Inbox policy wrapper for Clean Publisher.
 
 The generic sync engine stays reusable. This wrapper adds production-only
-source-name policy and stable identities for explicitly approved special lanes.
+source-name policy, stable identities for explicitly approved special lanes,
+and a self-clearing backlog for Owner-approved APKGs that predated polling.
 """
 from __future__ import annotations
 
@@ -18,6 +19,12 @@ CONFIG_PATH = ROOT / "miki-publisher.json"
 CLEAN_ZH2000_PATH = "zh2000v2.apkg"
 MOTHER_CHILD_PATH = "QY于越刑法母子题v4.5记忆卡片_母子题跳转版.apkg"
 POLITICS_XUTAO_PATH = "27政治xutao强化课阶段测_水墨青总包_五科01史纲_02思修_03马原_04毛中特_05新思想165题.apkg"
+MOTHER_CHILD_COMMIT = "d2d718137426bb693ebdb141c5b7f56c1dbb99cf"
+POLITICS_XUTAO_COMMIT = "806ed26bd6a1b2e74aaa22f08bc0a3d0c76e65b1"
+APPROVED_BACKFILLS = (
+    (MOTHER_CHILD_COMMIT, MOTHER_CHILD_PATH),
+    (POLITICS_XUTAO_COMMIT, POLITICS_XUTAO_PATH),
+)
 _ORIGINAL_PARSE_FILENAME = sync.parse_filename
 _FORBIDDEN_DESCRIPTION = "由 Owner Inbox 自动静态审计并发布。"
 
@@ -69,6 +76,43 @@ def parse_filename(path: str) -> dict:
             "explicitVersion": "2027",
         }
     return _ORIGINAL_PARSE_FILENAME(path)
+
+
+def _published_origin_paths(config: dict) -> set[str]:
+    return {
+        normalize_path((variant.get("origin") or {}).get("path") or "")
+        for pack in config.get("packs", [])
+        for release in pack.get("releases", [])
+        for variant in release.get("variants", [])
+    }
+
+
+def ensure_approved_backfills(config_path: Path) -> None:
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    source = config.setdefault("sourceInbox", {})
+    published = _published_origin_paths(config)
+    bootstrap = list(source.get("bootstrap") or [])
+    existing = {
+        (str(item.get("sourceCommit") or "").lower(), normalize_path(item.get("sourcePath") or ""))
+        for item in bootstrap
+    }
+    changed = False
+    for commit, path in APPROVED_BACKFILLS:
+        key = (commit, path)
+        if path in published or key in existing:
+            continue
+        bootstrap.append({
+            "sourceCommit": commit,
+            "sourcePath": path,
+            "provenance": "OWNER_UPLOAD_ASSERTION",
+        })
+        changed = True
+    if changed:
+        source["bootstrap"] = bootstrap
+        config_path.write_text(
+            json.dumps(config, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
 
 
 def sanitize_public_metadata(config_path: Path) -> None:
@@ -126,6 +170,7 @@ def main() -> None:
     config_path = Path(args.config).resolve()
     source_dir = Path(args.source_dir).resolve() if args.source_dir else root / ".miki-owner-inbox"
 
+    ensure_approved_backfills(config_path)
     paths = candidate_paths(config_path, source_dir)
     validate_candidate_paths(paths)
 
