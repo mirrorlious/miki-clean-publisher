@@ -25,8 +25,8 @@
     {
       "packId": "owner-pack-6aa5b38bbba0",
       "title": "2027法硕法基强化题",
-      "description": "2027法硕法基强化题，由 Owner Inbox 自动静态审计并发布。",
-      "author": "Owner 上传",
+      "description": "2027法硕法基强化题。",
+      "author": "社区分享",
       "license": "仅供个人学习",
       "subject": "",
       "usageHint": "加入后可在 Miki 公共池中安装。",
@@ -71,8 +71,8 @@
     {
       "packId": "owner-pack-94b82faa40c4",
       "title": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)",
-      "description": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)，由 Owner Inbox 自动静态审计并发布。",
-      "author": "Owner 上传",
+      "description": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)。",
+      "author": "社区分享",
       "license": "仅供个人学习",
       "subject": "",
       "usageHint": "加入后可在 Miki 公共池中安装。",
@@ -117,8 +117,8 @@
     {
       "packId": "zh2000-clean",
       "title": "27法硕 ZH2000 清洗版",
-      "description": "27法硕 ZH2000 清洗版，由 Owner Inbox 自动静态审计并发布。",
-      "author": "Owner 上传",
+      "description": "27法硕 ZH2000 清洗版。",
+      "author": "社区分享",
       "license": "仅供个人学习",
       "subject": "",
       "usageHint": "加入后可在 Miki 公共池中安装。",
@@ -154,6 +154,98 @@
                 "familyKey": "zh2000-clean",
                 "contentFingerprint": "sha256:f5c24964b205da6ea759ef9d15da30be0978b542ceb9b535980c1b17a04fd034",
                 "templateFingerprint": "sha256:f1d863dbeaea6570dd79a55b73801422dcf244c902f14e5615144d7e726272f9"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "packId": "qy-lsat-criminal-law-parent-child",
+      "title": "QY 于越刑法母子题",
+      "description": "QY 于越刑法母子题。",
+      "author": "社区分享",
+      "license": "仅供个人学习",
+      "subject": "",
+      "usageHint": "加入后可在 Miki 公共池中安装。",
+      "autoIdentity": {
+        "familyKey": "qy-yuyue-criminal-law-parent-child",
+        "createdBy": "OWNER_INBOX_AUTO_PUBLISH_V1"
+      },
+      "currentReleaseId": "v1",
+      "releases": [
+        {
+          "releaseId": "v1",
+          "displayVersion": "4.5",
+          "status": "ACTIVE",
+          "defaultVariantId": "linked",
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:2ccd363c93f83152b0eecb6eaaee2fb5737d7759c5573f3dd70dfb659a3eab11",
+            "templateFingerprint": "sha256:a987fb31a04e60ca9271f1861385e869a9a4b8e9b76030edb297ac5d77bdb603",
+            "autoDecision": "NEW_FAMILY",
+            "basis": "No existing semantic-content or deterministic-family-key match."
+          },
+          "variants": [
+            {
+              "variantId": "linked",
+              "label": "母子题跳转版",
+              "sourcePath": "artifacts/qy-lsat-criminal-law-parent-child/v1/linked-2c5a932fdaa0.apkg",
+              "origin": {
+                "repository": "mirrorlious/ankicardsfo1po",
+                "commit": "d2d718137426bb693ebdb141c5b7f56c1dbb99cf",
+                "path": "QY于越刑法母子题v4.5记忆卡片_母子题跳转版.apkg",
+                "provenance": "OWNER_UPLOAD_ASSERTION"
+              },
+              "autoIdentity": {
+                "familyKey": "qy-yuyue-criminal-law-parent-child",
+                "contentFingerprint": "sha256:2ccd363c93f83152b0eecb6eaaee2fb5737d7759c5573f3dd70dfb659a3eab11",
+                "templateFingerprint": "sha256:a987fb31a04e60ca9271f1861385e869a9a4b8e9b76030edb297ac5d77bdb603"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "packId": "postgrad-politics-xutao-stage-tests",
+      "title": "27政治徐涛强化课阶段测",
+      "description": "27政治徐涛强化课阶段测。",
+      "author": "社区分享",
+      "license": "仅供个人学习",
+      "subject": "",
+      "usageHint": "加入后可在 Miki 公共池中安装。",
+      "autoIdentity": {
+        "familyKey": "postgrad-politics-xutao-stage-tests",
+        "createdBy": "OWNER_INBOX_AUTO_PUBLISH_V1"
+      },
+      "currentReleaseId": "v1",
+      "releases": [
+        {
+          "releaseId": "v1",
+          "displayVersion": "2027",
+          "status": "ACTIVE",
+          "defaultVariantId": "shuimo",
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:c4d139d33efcb65d7a396f4b7a72623796e8fe79e9294156951cb30604247871",
+            "templateFingerprint": "sha256:07b9e13f8bf49d7f0ee78c8f661240391eef048aa3dea5dce7e12d867e6610c3",
+            "autoDecision": "NEW_FAMILY",
+            "basis": "No existing semantic-content or deterministic-family-key match."
+          },
+          "variants": [
+            {
+              "variantId": "shuimo",
+              "label": "水墨青",
+              "sourcePath": "artifacts/postgrad-politics-xutao-stage-tests/v1/shuimo-c2eb6fa8174a.apkg",
+              "origin": {
+                "repository": "mirrorlious/ankicardsfo1po",
+                "commit": "806ed26bd6a1b2e74aaa22f08bc0a3d0c76e65b1",
+                "path": "27政治xutao强化课阶段测_水墨青总包_五科01史纲_02思修_03马原_04毛中特_05新思想165题.apkg",
+                "provenance": "OWNER_UPLOAD_ASSERTION"
+              },
+              "autoIdentity": {
+                "familyKey": "postgrad-politics-xutao-stage-tests",
+                "contentFingerprint": "sha256:c4d139d33efcb65d7a396f4b7a72623796e8fe79e9294156951cb30604247871",
+                "templateFingerprint": "sha256:07b9e13f8bf49d7f0ee78c8f661240391eef048aa3dea5dce7e12d867e6610c3"
               }
             }
           ]
