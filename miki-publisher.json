@@ -18,7 +18,6 @@
     "lastSeenCommit": "b3c632014ddc23e14a3f4124ca7721a3c60f8e69",
     "bootstrap": [],
     "denyTokens": [
-      "zh2000",
       "dyl"
     ]
   },
