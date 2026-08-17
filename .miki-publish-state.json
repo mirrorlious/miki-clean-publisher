@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "repository": "mirrorlious/miki-clean-publisher",
   "publisher": "mirrorlious",
-  "generatedAt": "2026-08-16T23:37:15.817010+00:00",
+  "generatedAt": "2026-08-17T00:11:46.198916+00:00",
   "packs": [
     {
       "packId": "owner-pack-6aa5b38bbba0",
@@ -34,7 +34,7 @@
               "cardCount": 180,
               "noteCount": 180,
               "deckCount": 3,
-              "version": "2026.16.08+1fa43b73",
+              "version": "2026.17.08+1fa43b73",
               "resourceVersion": "owner-pack-6aa5b38bbba0-shuimo-1fa43b734795-137221",
               "title": "2027法硕法基强化题",
               "description": "2027法硕法基强化题，由 Owner Inbox 自动静态审计并发布。",
@@ -44,6 +44,96 @@
               "usageHint": "加入后可在 Miki 公共池中安装。",
               "t1CandidateCount": 0,
               "blockedTemplateCount": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "packId": "owner-pack-94b82faa40c4",
+      "currentReleaseId": "v1",
+      "releases": [
+        {
+          "releaseId": "v1",
+          "displayVersion": "1",
+          "status": "ACTIVE",
+          "defaultVariantId": "original",
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:284961df4e6af4b356853ec794417f7ca95799c8bfd1c06c71f2d8402058533e",
+            "templateFingerprint": "sha256:2e10eb83a4d457e0dcae783d573415cb3d742ac7d13f542b04e4ed0a05f4f24a",
+            "autoDecision": "NEW_FAMILY",
+            "basis": "No existing semantic-content or deterministic-family-key match."
+          },
+          "variants": [
+            {
+              "packId": "owner-pack-94b82faa40c4",
+              "variantId": "original",
+              "label": "原版",
+              "sourcePath": "artifacts/owner-pack-94b82faa40c4/v1/original-230e5dde8c00.apkg",
+              "sourceSha256": "230e5dde8c00c2c32317e383a70d1e228856e2ad19d0ddd040dd7b241ab60dbb",
+              "sourceSizeBytes": 143984,
+              "contentFingerprint": "sha256:284961df4e6af4b356853ec794417f7ca95799c8bfd1c06c71f2d8402058533e",
+              "templateFingerprint": "sha256:2e10eb83a4d457e0dcae783d573415cb3d742ac7d13f542b04e4ed0a05f4f24a",
+              "manifestPath": ".miki-owner-pack-94b82faa40c4-original.manifest.v2.json",
+              "templateReportPath": ".miki-reports/owner-pack-94b82faa40c4-original.json",
+              "cardCount": 330,
+              "noteCount": 330,
+              "deckCount": 18,
+              "version": "2026.17.08+230e5dde",
+              "resourceVersion": "owner-pack-94b82faa40c4-original-230e5dde8c00-143984",
+              "title": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)",
+              "description": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)，由 Owner Inbox 自动静态审计并发布。",
+              "subject": "",
+              "license": "仅供个人学习",
+              "author": "Owner 上传",
+              "usageHint": "加入后可在 Miki 公共池中安装。",
+              "t1CandidateCount": 0,
+              "blockedTemplateCount": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "packId": "zh2000-clean",
+      "currentReleaseId": "v1",
+      "releases": [
+        {
+          "releaseId": "v1",
+          "displayVersion": "1",
+          "status": "ACTIVE",
+          "defaultVariantId": "clean",
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:f5c24964b205da6ea759ef9d15da30be0978b542ceb9b535980c1b17a04fd034",
+            "templateFingerprint": "sha256:f1d863dbeaea6570dd79a55b73801422dcf244c902f14e5615144d7e726272f9",
+            "autoDecision": "NEW_FAMILY",
+            "basis": "No existing semantic-content or deterministic-family-key match."
+          },
+          "variants": [
+            {
+              "packId": "zh2000-clean",
+              "variantId": "clean",
+              "label": "清洗版",
+              "sourcePath": "artifacts/zh2000-clean/v1/clean-e642031cf170.apkg",
+              "sourceSha256": "e642031cf1703ce7157d7f3dd3820f7e23a8e51d262a40ea50619434d16c69ff",
+              "sourceSizeBytes": 1143561,
+              "contentFingerprint": "sha256:f5c24964b205da6ea759ef9d15da30be0978b542ceb9b535980c1b17a04fd034",
+              "templateFingerprint": "sha256:f1d863dbeaea6570dd79a55b73801422dcf244c902f14e5615144d7e726272f9",
+              "manifestPath": ".miki-zh2000-clean-clean.manifest.v2.json",
+              "templateReportPath": ".miki-reports/zh2000-clean-clean.json",
+              "cardCount": 2090,
+              "noteCount": 2090,
+              "deckCount": 281,
+              "version": "2026.17.08+e642031c",
+              "resourceVersion": "zh2000-clean-clean-e642031cf170-1143561",
+              "title": "27法硕 ZH2000 清洗版",
+              "description": "27法硕 ZH2000 清洗版，由 Owner Inbox 自动静态审计并发布。",
+              "subject": "",
+              "license": "仅供个人学习",
+              "author": "Owner 上传",
+              "usageHint": "加入后可在 Miki 公共池中安装。",
+              "t1CandidateCount": 0,
+              "blockedTemplateCount": 1
             }
           ]
         }

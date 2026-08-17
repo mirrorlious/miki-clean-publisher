@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 2,
+  "packId": "zh2000-clean",
+  "releaseId": "v1",
+  "variantId": "clean",
+  "title": "27法硕 ZH2000 清洗版",
+  "description": "27法硕 ZH2000 清洗版，由 Owner Inbox 自动静态审计并发布。",
+  "version": "2026.17.08+e642031c",
+  "resourceVersion": "zh2000-clean-clean-e642031cf170-1143561",
+  "payload": {
+    "format": "apkg",
+    "entryResourceIds": [
+      "source-apkg"
+    ]
+  },
+  "runtime": {
+    "contentFormat": "anki",
+    "renderEngine": "anki-core-v1"
+  },
+  "counts": {
+    "sourceCardCount": 2090,
+    "finalCardCount": 2090,
+    "deckCount": 281,
+    "duplicateCardCountRemoved": 0,
+    "uniqueKnowledgeMapCount": 0
+  },
+  "resources": [
+    {
+      "id": "source-apkg",
+      "role": "apkg",
+      "path": "artifacts/zh2000-clean/v1/clean-e642031cf170.apkg",
+      "mediaType": "application/octet-stream",
+      "sizeBytes": 1143561,
+      "integrity": {
+        "algorithm": "sha256",
+        "digest": "e642031cf1703ce7157d7f3dd3820f7e23a8e51d262a40ea50619434d16c69ff"
+      },
+      "cachePolicy": "immutable"
+    }
+  ]
+}

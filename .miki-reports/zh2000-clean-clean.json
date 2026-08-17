@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "packId": "zh2000-clean",
+  "releaseId": "v1",
+  "variantId": "clean",
+  "sourcePath": "artifacts/zh2000-clean/v1/clean-e642031cf170.apkg",
+  "sourceSha256": "e642031cf1703ce7157d7f3dd3820f7e23a8e51d262a40ea50619434d16c69ff",
+  "sourceSizeBytes": 1143561,
+  "collection": "collection.anki2",
+  "contentFingerprint": "sha256:f5c24964b205da6ea759ef9d15da30be0978b542ceb9b535980c1b17a04fd034",
+  "templateFingerprint": "sha256:f1d863dbeaea6570dd79a55b73801422dcf244c902f14e5615144d7e726272f9",
+  "templateEditPolicy": "fields-only",
+  "javascriptPolicy": "fingerprint-gated-disabled-by-default",
+  "templates": [
+    {
+      "modelId": "1786922130895",
+      "modelName": "基础进阶27zh2000-水墨青",
+      "cardOrd": 0,
+      "templateName": "选择题",
+      "fieldNames": [
+        "题号",
+        "题型",
+        "题目",
+        "选项A",
+        "选项B",
+        "选项C",
+        "选项D",
+        "正确答案",
+        "解析",
+        "学科",
+        "牌组路径",
+        "选项交互",
+        "选项展示"
+      ],
+      "fingerprint": "sha256:e6cf53f56147b22918bb11c29960af53302107646f736071a59f83787a91e95c",
+      "executableSourceCount": 1,
+      "interactionCandidate": "blocked",
+      "blockers": [
+        "dynamic-code"
+      ],
+      "executionApproved": false,
+      "safeInteractionPolicyVersion": 1,
+      "safeInteractionApproved": false,
+      "safeInteractionMode": "none",
+      "safeInteractionFingerprint": "sha256:83c45fffdb2ed9f0c9a7671998297b5db30437a037f4f0c066db05ddd312cb84",
+      "safeInteractionPlan": null,
+      "safeInteractionDiagnostics": {
+        "selectorHints": [
+          "#answer-toggle",
+          ".opt-input",
+          "#single-reset",
+          "#multi-submit"
+        ],
+        "classHints": [
+          "card",
+          "quiz-card",
+          "qz-top-line",
+          "qz-meta",
+          "qz-kicker",
+          "qz-number",
+          "qz-question",
+          "qz-options",
+          "option",
+          "option-label",
+          "opt-badge",
+          "option-text",
+          "opt-text",
+          "opt-input",
+          "reset-radio",
+          "reset-btn",
+          "submit-check",
+          "submit-btn",
+          "answer-toggle",
+          "quiz-controls",
+          "action-primary",
+          "action-secondary",
+          "answer-reveal",
+          "card-back",
+          "is-correct",
+          "dim",
+          "ans-badge",
+          "ans-badge-analysis",
+          "ans-text",
+          "exp-block",
+          "ans-answer",
+          "ans-para"
+        ],
+        "answerFieldHint": "正确答案",
+        "valueAttributeHint": ""
+      }
+    }
+  ],
+  "summary": {
+    "templateCount": 1,
+    "javascriptTemplateCount": 1,
+    "t1CandidateCount": 0,
+    "blockedTemplateCount": 1,
+    "executionApprovedCount": 0,
+    "safeInteractionApprovedCount": 0
+  },
+  "safeInteractionPolicyVersion": 1,
+  "rawJavascriptExecutionApproved": false
+}

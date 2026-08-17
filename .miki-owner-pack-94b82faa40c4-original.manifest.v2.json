@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 2,
+  "packId": "owner-pack-94b82faa40c4",
+  "releaseId": "v1",
+  "variantId": "original",
+  "title": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)",
+  "description": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)，由 Owner Inbox 自动静态审计并发布。",
+  "version": "2026.17.08+230e5dde",
+  "resourceVersion": "owner-pack-94b82faa40c4-original-230e5dde8c00-143984",
+  "payload": {
+    "format": "apkg",
+    "entryResourceIds": [
+      "source-apkg"
+    ]
+  },
+  "runtime": {
+    "contentFormat": "anki",
+    "renderEngine": "anki-core-v1"
+  },
+  "counts": {
+    "sourceCardCount": 330,
+    "finalCardCount": 330,
+    "deckCount": 18,
+    "duplicateCardCountRemoved": 0,
+    "uniqueKnowledgeMapCount": 0
+  },
+  "resources": [
+    {
+      "id": "source-apkg",
+      "role": "apkg",
+      "path": "artifacts/owner-pack-94b82faa40c4/v1/original-230e5dde8c00.apkg",
+      "mediaType": "application/octet-stream",
+      "sizeBytes": 143984,
+      "integrity": {
+        "algorithm": "sha256",
+        "digest": "230e5dde8c00c2c32317e383a70d1e228856e2ad19d0ddd040dd7b241ab60dbb"
+      },
+      "cachePolicy": "immutable"
+    }
+  ]
+}
