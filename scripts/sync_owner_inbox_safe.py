@@ -21,11 +21,16 @@ ZH2000_PUBLIC_TITLE = "27法硕 ZH2000 基础+进阶"
 ZH2000_PUBLIC_VARIANT_LABEL = "基础+进阶"
 MOTHER_CHILD_PATH = "QY于越刑法母子题v4.5记忆卡片_母子题跳转版.apkg"
 POLITICS_XUTAO_PATH = "27政治xutao强化课阶段测_水墨青总包_五科01史纲_02思修_03马原_04毛中特_05新思想165题.apkg"
+JUEXIAO_CRIMINAL_PATH = "觉晓5000题刑法（偏基础）.apkg"
+JUEXIAO_CIVIL_PATH = "觉晓5000题民法（偏基础）.apkg"
 MOTHER_CHILD_COMMIT = "d2d718137426bb693ebdb141c5b7f56c1dbb99cf"
 POLITICS_XUTAO_COMMIT = "806ed26bd6a1b2e74aaa22f08bc0a3d0c76e65b1"
+JUEXIAO_SOURCE_COMMIT = "c2a45c1aec9515664e249b0e4682d24aa46fcc66"
 APPROVED_BACKFILLS = (
     (MOTHER_CHILD_COMMIT, MOTHER_CHILD_PATH),
     (POLITICS_XUTAO_COMMIT, POLITICS_XUTAO_PATH),
+    (JUEXIAO_SOURCE_COMMIT, JUEXIAO_CRIMINAL_PATH),
+    (JUEXIAO_SOURCE_COMMIT, JUEXIAO_CIVIL_PATH),
 )
 _ORIGINAL_PARSE_FILENAME = sync.parse_filename
 _FORBIDDEN_DESCRIPTION = "由 Owner Inbox 自动静态审计并发布。"
@@ -57,6 +62,24 @@ def parse_filename(path: str) -> dict:
             "packId": "zh2000-clean",
             "variantId": "clean",
             "variantLabel": ZH2000_PUBLIC_VARIANT_LABEL,
+            "explicitVersion": "",
+        }
+    if normalized == normalize_path(JUEXIAO_CRIMINAL_PATH):
+        return {
+            "title": "觉晓5000题刑法（偏基础）",
+            "familyKey": "juexiao-5000-criminal-basic",
+            "packId": "juexiao-5000-criminal-basic",
+            "variantId": "original",
+            "variantLabel": "原版",
+            "explicitVersion": "",
+        }
+    if normalized == normalize_path(JUEXIAO_CIVIL_PATH):
+        return {
+            "title": "觉晓5000题民法（偏基础）",
+            "familyKey": "juexiao-5000-civil-basic",
+            "packId": "juexiao-5000-civil-basic",
+            "variantId": "original",
+            "variantLabel": "原版",
             "explicitVersion": "",
         }
     if normalized == MOTHER_CHILD_PATH:
@@ -100,8 +123,9 @@ def ensure_approved_backfills(config_path: Path) -> None:
     }
     changed = False
     for commit, path in APPROVED_BACKFILLS:
-        key = (commit, path)
-        if path in published or key in existing:
+        normalized_path = normalize_path(path)
+        key = (commit, normalized_path)
+        if normalized_path in published or key in existing:
             continue
         bootstrap.append({
             "sourceCommit": commit,

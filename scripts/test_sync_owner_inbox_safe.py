@@ -47,6 +47,14 @@ class CleanZh2000PolicyTest(unittest.TestCase):
         self.assertEqual(parsed["packId"], "postgrad-politics-xutao-stage-tests")
         self.assertEqual(parsed["variantId"], "shuimo")
 
+    def test_juexiao_basic_packs_keep_owner_requested_identity(self):
+        criminal = safe.parse_filename(safe.JUEXIAO_CRIMINAL_PATH)
+        civil = safe.parse_filename(safe.JUEXIAO_CIVIL_PATH)
+        self.assertEqual(criminal["title"], "觉晓5000题刑法（偏基础）")
+        self.assertEqual(criminal["packId"], "juexiao-5000-criminal-basic")
+        self.assertEqual(civil["title"], "觉晓5000题民法（偏基础）")
+        self.assertEqual(civil["packId"], "juexiao-5000-civil-basic")
+
     def test_approved_backfills_are_added_once_and_skip_published_origins(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "miki-publisher.json"
@@ -54,7 +62,11 @@ class CleanZh2000PolicyTest(unittest.TestCase):
                 "sourceInbox": {"bootstrap": []},
                 "packs": [{
                     "releases": [{
-                        "variants": [{"origin": {"path": safe.POLITICS_XUTAO_PATH}}]
+                        "variants": [
+                            {"origin": {"path": safe.POLITICS_XUTAO_PATH}},
+                            {"origin": {"path": safe.JUEXIAO_CRIMINAL_PATH}},
+                            {"origin": {"path": safe.JUEXIAO_CIVIL_PATH}},
+                        ]
                     }]
                 }],
             }, ensure_ascii=False), encoding="utf-8")
