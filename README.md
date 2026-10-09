@@ -50,3 +50,4 @@ Miki must fetch the feed at that immutable commit and verify its digest before p
 - `scripts/sync_owner_inbox.py` — static Owner Inbox ingestion/classification.
 - `scripts/publish_latest_pointer.py` — latest-pointer generator.
 - `.github/workflows/miki-owner-publisher.yml` — PR validation, five-minute polling and publication workflow.
+<!-- manual-owner-inbox-refresh: 2026-10-09-juexiao-5000 -->
