@@ -15,7 +15,7 @@
   "sourceInbox": {
     "repository": "mirrorlious/ankicardsfo1po",
     "branch": "main",
-    "lastSeenCommit": "131cd29a93bbece61fb82388dbfdca24708c75c3",
+    "lastSeenCommit": "c2a45c1aec9515664e249b0e4682d24aa46fcc66",
     "bootstrap": [],
     "denyTokens": [
       "dyl"
@@ -253,5 +253,22 @@
       ]
     }
   ],
-  "pendingClassification": []
+  "pendingClassification": [
+    {
+      "sourceRepository": "mirrorlious/ankicardsfo1po",
+      "sourceCommit": "c2a45c1aec9515664e249b0e4682d24aa46fcc66",
+      "sourcePath": "觉晓5000题刑法（偏基础）.apkg",
+      "status": "PENDING_CLASSIFICATION",
+      "reason": "AMBIGUOUS_OR_INVALID",
+      "detail": "Static ingestion/classification failed closed: ValueError: Anki collection contains no publishable templates"
+    },
+    {
+      "sourceRepository": "mirrorlious/ankicardsfo1po",
+      "sourceCommit": "c2a45c1aec9515664e249b0e4682d24aa46fcc66",
+      "sourcePath": "觉晓5000题民法（偏基础）.apkg",
+      "status": "PENDING_CLASSIFICATION",
+      "reason": "AMBIGUOUS_OR_INVALID",
+      "detail": "Static ingestion/classification failed closed: ValueError: Anki collection contains no publishable templates"
+    }
+  ]
 }
