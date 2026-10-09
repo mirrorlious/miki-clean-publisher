@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import sqlite3
 import tempfile
 import unittest
 from pathlib import Path
@@ -165,6 +166,102 @@ class ConfigSchemaValidationTest(unittest.TestCase):
         self.assertEqual(first["currentReleaseId"], "v1")
         self.assertEqual(first["releases"][0]["variants"][0]["sourcePath"], "OldPack.apkg")
         self.assertEqual(config["packs"][1]["packId"], "incoming")
+
+
+class NormalizedAnkiTemplateMetadataTest(unittest.TestCase):
+    @staticmethod
+    def proto_text(field_number: int, value: str) -> bytes:
+        raw = value.encode("utf-8")
+        key = (field_number << 3) | 2
+
+        def varint(number: int) -> bytes:
+            out = bytearray()
+            while True:
+                byte = number & 0x7F
+                number >>= 7
+                out.append(byte | (0x80 if number else 0))
+                if not number:
+                    return bytes(out)
+
+        return varint(key) + varint(len(raw)) + raw
+
+    def make_connection(self):
+        connection = sqlite3.connect(":memory:")
+        connection.executescript(
+            """
+            CREATE TABLE col(models TEXT);
+            INSERT INTO col(models) VALUES ('{}');
+            CREATE TABLE notetypes(
+                id INTEGER PRIMARY KEY,
+                name TEXT NOT NULL,
+                mtime_secs INTEGER NOT NULL DEFAULT 0,
+                usn INTEGER NOT NULL DEFAULT 0,
+                config BLOB NOT NULL
+            );
+            CREATE TABLE fields(
+                ntid INTEGER NOT NULL,
+                ord INTEGER NOT NULL,
+                name TEXT NOT NULL,
+                config BLOB NOT NULL,
+                PRIMARY KEY(ntid, ord)
+            );
+            CREATE TABLE templates(
+                ntid INTEGER NOT NULL,
+                ord INTEGER NOT NULL,
+                name TEXT NOT NULL,
+                mtime_secs INTEGER NOT NULL DEFAULT 0,
+                usn INTEGER NOT NULL DEFAULT 0,
+                config BLOB NOT NULL,
+                PRIMARY KEY(ntid, ord)
+            );
+            """
+        )
+        return connection
+
+    def test_empty_legacy_models_falls_back_to_normalized_tables(self):
+        connection = self.make_connection()
+        self.addCleanup(connection.close)
+        css = ".card { font-size: 19px; }"
+        qfmt = "<div>{{题干}}</div>"
+        afmt = "{{FrontSide}}<hr>{{答案}}"
+        connection.execute(
+            "INSERT INTO notetypes(id, name, config) VALUES (?, ?, ?)",
+            (123, "新版题型", self.proto_text(3, css)),
+        )
+        connection.executemany(
+            "INSERT INTO fields(ntid, ord, name, config) VALUES (?, ?, ?, ?)",
+            [(123, 0, "题干", b""), (123, 1, "答案", b"")],
+        )
+        connection.execute(
+            "INSERT INTO templates(ntid, ord, name, config) VALUES (?, ?, ?, ?)",
+            (123, 0, "做题与解析", self.proto_text(1, qfmt) + self.proto_text(2, afmt)),
+        )
+
+        models = engine.parse_models(connection)
+        model = models["123"]
+        self.assertEqual(model["name"], "新版题型")
+        self.assertEqual(model["css"], css)
+        self.assertEqual([field["name"] for field in model["flds"]], ["题干", "答案"])
+        self.assertEqual(model["tmpls"][0]["qfmt"], qfmt)
+        self.assertEqual(model["tmpls"][0]["afmt"], afmt)
+
+        assessed = engine.assess_template("123", model, model["tmpls"][0], 0)
+        self.assertEqual(assessed["interactionCandidate"], "static")
+        self.assertEqual(assessed["fieldNames"], ["题干", "答案"])
+
+    def test_malformed_normalized_template_fails_closed(self):
+        connection = self.make_connection()
+        self.addCleanup(connection.close)
+        connection.execute(
+            "INSERT INTO notetypes(id, name, config) VALUES (?, ?, ?)",
+            (123, "新版题型", self.proto_text(3, ".card{}")),
+        )
+        connection.execute(
+            "INSERT INTO templates(ntid, ord, name, config) VALUES (?, ?, ?, ?)",
+            (123, 0, "broken", b"\x0a\x80"),
+        )
+        with self.assertRaises(ValueError):
+            engine.parse_models(connection)
 
 
 class ClassificationRuleTest(unittest.TestCase):
