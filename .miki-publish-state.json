@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "repository": "mirrorlious/miki-clean-publisher",
   "publisher": "mirrorlious",
-  "generatedAt": "2026-10-09T13:25:04.237795+00:00",
+  "generatedAt": "2026-10-09T13:31:24.462632+00:00",
   "packs": [
     {
       "packId": "owner-pack-6aa5b38bbba0",
@@ -228,24 +228,97 @@
           ]
         }
       ]
-    }
-  ],
-  "pendingClassification": [
-    {
-      "sourceRepository": "mirrorlious/ankicardsfo1po",
-      "sourceCommit": "c2a45c1aec9515664e249b0e4682d24aa46fcc66",
-      "sourcePath": "觉晓5000题刑法（偏基础）.apkg",
-      "status": "PENDING_CLASSIFICATION",
-      "reason": "AMBIGUOUS_OR_INVALID",
-      "detail": "Static ingestion/classification failed closed: ValueError: Anki collection contains no publishable templates"
     },
     {
-      "sourceRepository": "mirrorlious/ankicardsfo1po",
-      "sourceCommit": "c2a45c1aec9515664e249b0e4682d24aa46fcc66",
-      "sourcePath": "觉晓5000题民法（偏基础）.apkg",
-      "status": "PENDING_CLASSIFICATION",
-      "reason": "AMBIGUOUS_OR_INVALID",
-      "detail": "Static ingestion/classification failed closed: ValueError: Anki collection contains no publishable templates"
+      "packId": "juexiao-5000-criminal-basic",
+      "currentReleaseId": "v1",
+      "releases": [
+        {
+          "releaseId": "v1",
+          "displayVersion": "1",
+          "status": "ACTIVE",
+          "defaultVariantId": "original",
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:78873a8453b4be3875578aa60dcb7fefa57ad2859c5e0be26d0a90b062e2f4cb",
+            "templateFingerprint": "sha256:38135b43dfd175ba1394006c7f7cf28ea437198e67c184ade0ff76efac5e0095",
+            "autoDecision": "NEW_FAMILY",
+            "basis": "No existing semantic-content or deterministic-family-key match."
+          },
+          "variants": [
+            {
+              "packId": "juexiao-5000-criminal-basic",
+              "variantId": "original",
+              "label": "原版",
+              "sourcePath": "artifacts/juexiao-5000-criminal-basic/v1/original-62cb8f935516.apkg",
+              "sourceSha256": "62cb8f935516c6cd6e4e43f85e7197fac2d1d40ec004a1be6acff74447ee3afc",
+              "sourceSizeBytes": 568662,
+              "contentFingerprint": "sha256:78873a8453b4be3875578aa60dcb7fefa57ad2859c5e0be26d0a90b062e2f4cb",
+              "templateFingerprint": "sha256:38135b43dfd175ba1394006c7f7cf28ea437198e67c184ade0ff76efac5e0095",
+              "manifestPath": ".miki-juexiao-5000-criminal-basic-original.manifest.v2.json",
+              "templateReportPath": ".miki-reports/juexiao-5000-criminal-basic-original.json",
+              "cardCount": 1042,
+              "noteCount": 1042,
+              "deckCount": 25,
+              "version": "2026.10.09+62cb8f93",
+              "resourceVersion": "juexiao-5000-criminal-basic-original-62cb8f935516-568662",
+              "title": "觉晓5000题刑法（偏基础）",
+              "description": "觉晓5000题刑法（偏基础）。",
+              "subject": "",
+              "license": "仅供个人学习",
+              "author": "社区分享",
+              "usageHint": "加入后可在 Miki 公共池中安装。",
+              "t1CandidateCount": 0,
+              "blockedTemplateCount": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "packId": "juexiao-5000-civil-basic",
+      "currentReleaseId": "v1",
+      "releases": [
+        {
+          "releaseId": "v1",
+          "displayVersion": "1",
+          "status": "ACTIVE",
+          "defaultVariantId": "original",
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:3d914e0e8eb9309e855cb7af147043c7bdc93e36965f347d3d32fb55b308245f",
+            "templateFingerprint": "sha256:38135b43dfd175ba1394006c7f7cf28ea437198e67c184ade0ff76efac5e0095",
+            "autoDecision": "NEW_FAMILY",
+            "basis": "No existing semantic-content or deterministic-family-key match."
+          },
+          "variants": [
+            {
+              "packId": "juexiao-5000-civil-basic",
+              "variantId": "original",
+              "label": "原版",
+              "sourcePath": "artifacts/juexiao-5000-civil-basic/v1/original-107507282ff0.apkg",
+              "sourceSha256": "107507282ff0286a85520c3b35c60ada9e2e01f5eb26fed241ff0faf7584de72",
+              "sourceSizeBytes": 683861,
+              "contentFingerprint": "sha256:3d914e0e8eb9309e855cb7af147043c7bdc93e36965f347d3d32fb55b308245f",
+              "templateFingerprint": "sha256:38135b43dfd175ba1394006c7f7cf28ea437198e67c184ade0ff76efac5e0095",
+              "manifestPath": ".miki-juexiao-5000-civil-basic-original.manifest.v2.json",
+              "templateReportPath": ".miki-reports/juexiao-5000-civil-basic-original.json",
+              "cardCount": 1265,
+              "noteCount": 1265,
+              "deckCount": 34,
+              "version": "2026.10.09+10750728",
+              "resourceVersion": "juexiao-5000-civil-basic-original-107507282ff0-683861",
+              "title": "觉晓5000题民法（偏基础）",
+              "description": "觉晓5000题民法（偏基础）。",
+              "subject": "",
+              "license": "仅供个人学习",
+              "author": "社区分享",
+              "usageHint": "加入后可在 Miki 公共池中安装。",
+              "t1CandidateCount": 0,
+              "blockedTemplateCount": 0
+            }
+          ]
+        }
+      ]
     }
-  ]
+  ],
+  "pendingClassification": []
 }
