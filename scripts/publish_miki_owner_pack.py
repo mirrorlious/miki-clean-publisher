@@ -326,17 +326,134 @@ def open_collection(value: bytes):
         raise
 
 
+def _read_proto_varint(value: bytes, offset: int) -> tuple[int, int]:
+    result = 0
+    shift = 0
+    for _ in range(10):
+        if offset >= len(value):
+            raise ValueError("Anki normalized metadata contains a truncated protobuf varint")
+        byte = value[offset]
+        offset += 1
+        result |= (byte & 0x7F) << shift
+        if not byte & 0x80:
+            return result, offset
+        shift += 7
+    raise ValueError("Anki normalized metadata contains an oversized protobuf varint")
+
+
+def _protobuf_length_delimited(value: bytes) -> dict[int, list[bytes]]:
+    fields: dict[int, list[bytes]] = {}
+    offset = 0
+    while offset < len(value):
+        key, offset = _read_proto_varint(value, offset)
+        field_number = key >> 3
+        wire_type = key & 0x07
+        if field_number <= 0:
+            raise ValueError("Anki normalized metadata contains an invalid protobuf field")
+        if wire_type == 0:
+            _, offset = _read_proto_varint(value, offset)
+        elif wire_type == 1:
+            offset += 8
+        elif wire_type == 2:
+            length, offset = _read_proto_varint(value, offset)
+            end = offset + length
+            if end > len(value):
+                raise ValueError("Anki normalized metadata contains a truncated protobuf field")
+            fields.setdefault(field_number, []).append(value[offset:end])
+            offset = end
+        elif wire_type == 5:
+            offset += 4
+        else:
+            raise ValueError(f"Unsupported protobuf wire type in Anki normalized metadata: {wire_type}")
+        if offset > len(value):
+            raise ValueError("Anki normalized metadata contains a truncated protobuf scalar")
+    return fields
+
+
+def _protobuf_text(value: bytes, field_number: int, label: str) -> str:
+    candidates = _protobuf_length_delimited(bytes(value or b"")).get(field_number, [])
+    if not candidates:
+        return ""
+    try:
+        return candidates[0].decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise ValueError(f"Anki normalized {label} is not valid UTF-8") from error
+
+
+def _parse_normalized_models(connection: sqlite3.Connection) -> dict:
+    tables = {
+        str(row[0])
+        for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")
+    }
+    required = {"notetypes", "fields", "templates"}
+    if not required.issubset(tables):
+        return {}
+
+    notetype_columns = {row[1] for row in connection.execute("PRAGMA table_info(notetypes)")}
+    field_columns = {row[1] for row in connection.execute("PRAGMA table_info(fields)")}
+    template_columns = {row[1] for row in connection.execute("PRAGMA table_info(templates)")}
+    if not {"id", "name", "config"}.issubset(notetype_columns):
+        raise ValueError("Anki normalized notetypes metadata is incomplete")
+    if not {"ntid", "ord", "name"}.issubset(field_columns):
+        raise ValueError("Anki normalized field metadata is incomplete")
+    if not {"ntid", "ord", "name", "config"}.issubset(template_columns):
+        raise ValueError("Anki normalized template metadata is incomplete")
+
+    fields_by_notetype: dict[int, list[dict]] = {}
+    for ntid, ordinal, name in connection.execute(
+        "SELECT ntid, ord, name FROM fields ORDER BY ntid, ord"
+    ):
+        fields_by_notetype.setdefault(int(ntid), []).append({
+            "name": str(name or ""),
+            "ord": int(ordinal),
+        })
+
+    templates_by_notetype: dict[int, list[dict]] = {}
+    for ntid, ordinal, name, config in connection.execute(
+        "SELECT ntid, ord, name, config FROM templates ORDER BY ntid, ord"
+    ):
+        if not isinstance(config, (bytes, bytearray, memoryview)):
+            raise ValueError("Anki normalized template config is not binary")
+        raw = bytes(config)
+        templates_by_notetype.setdefault(int(ntid), []).append({
+            "name": str(name or ""),
+            "ord": int(ordinal),
+            "qfmt": _protobuf_text(raw, 1, "question template"),
+            "afmt": _protobuf_text(raw, 2, "answer template"),
+        })
+
+    models = {}
+    for model_id, name, config in connection.execute(
+        "SELECT id, name, config FROM notetypes ORDER BY id"
+    ):
+        if not isinstance(config, (bytes, bytearray, memoryview)):
+            raise ValueError("Anki normalized notetype config is not binary")
+        model_id = int(model_id)
+        models[str(model_id)] = {
+            "id": model_id,
+            "name": str(name or ""),
+            "css": _protobuf_text(bytes(config), 3, "stylesheet"),
+            "flds": fields_by_notetype.get(model_id, []),
+            "tmpls": templates_by_notetype.get(model_id, []),
+        }
+    return models
+
+
 def parse_models(connection: sqlite3.Connection) -> dict:
     columns = {row[1] for row in connection.execute("PRAGMA table_info(col)")}
-    if "models" not in columns:
-        raise ValueError("Anki collection does not expose col.models")
-    row = connection.execute("SELECT models FROM col LIMIT 1").fetchone()
-    if not row or not row[0]:
-        raise ValueError("Anki collection model metadata is missing")
-    models = json.loads(row[0])
-    if not isinstance(models, dict):
-        raise ValueError("Anki collection model metadata is invalid")
-    return models
+    if "models" in columns:
+        row = connection.execute("SELECT models FROM col LIMIT 1").fetchone()
+        if row and row[0]:
+            models = json.loads(row[0])
+            if not isinstance(models, dict):
+                raise ValueError("Anki collection model metadata is invalid")
+            if models:
+                return models
+
+    models = _parse_normalized_models(connection)
+    if models:
+        return models
+    raise ValueError("Anki collection model metadata is missing")
 
 
 def merge_metadata(config: dict, pack: dict, release: dict, variant: dict) -> dict:
