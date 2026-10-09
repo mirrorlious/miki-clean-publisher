@@ -123,8 +123,9 @@ def ensure_approved_backfills(config_path: Path) -> None:
     }
     changed = False
     for commit, path in APPROVED_BACKFILLS:
-        key = (commit, path)
-        if path in published or key in existing:
+        normalized_path = normalize_path(path)
+        key = (commit, normalized_path)
+        if normalized_path in published or key in existing:
             continue
         bootstrap.append({
             "sourceCommit": commit,
