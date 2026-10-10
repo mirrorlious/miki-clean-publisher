@@ -20,6 +20,7 @@ CLEAN_ZH2000_PATH = "zh2000v2.apkg"
 ZH2000_PUBLIC_TITLE = "27法硕 ZH2000 基础+进阶"
 ZH2000_PUBLIC_VARIANT_LABEL = "基础+进阶"
 MOTHER_CHILD_PATH = "QY于越刑法母子题v4.5记忆卡片_母子题跳转版.apkg"
+MOTHER_CHILD_COMPLETE_PATH = "QY刑法母子题_母子结构补全版.apkg"
 POLITICS_XUTAO_PATH = "27政治xutao强化课阶段测_水墨青总包_五科01史纲_02思修_03马原_04毛中特_05新思想165题.apkg"
 JUEXIAO_CRIMINAL_PATH = "觉晓5000题刑法（偏基础）.apkg"
 JUEXIAO_CIVIL_PATH = "觉晓5000题民法（偏基础）.apkg"
@@ -82,14 +83,15 @@ def parse_filename(path: str) -> dict:
             "variantLabel": "原版",
             "explicitVersion": "",
         }
-    if normalized == MOTHER_CHILD_PATH:
+    if normalized in (MOTHER_CHILD_PATH, MOTHER_CHILD_COMPLETE_PATH):
+        complete = normalized == MOTHER_CHILD_COMPLETE_PATH
         return {
             "title": "QY 于越刑法母子题",
             "familyKey": "qy-yuyue-criminal-law-parent-child",
             "packId": "qy-lsat-criminal-law-parent-child",
-            "variantId": "linked",
-            "variantLabel": "母子题跳转版",
-            "explicitVersion": "4.5",
+            "variantId": "structured" if complete else "linked",
+            "variantLabel": "10.10 母子结构补全版" if complete else "母子题跳转版",
+            "explicitVersion": "2026.10.10" if complete else "4.5",
         }
     if normalized == POLITICS_XUTAO_PATH:
         return {

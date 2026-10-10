@@ -47,6 +47,37 @@ class CleanZh2000PolicyTest(unittest.TestCase):
         self.assertEqual(parsed["packId"], "postgrad-politics-xutao-stage-tests")
         self.assertEqual(parsed["variantId"], "shuimo")
 
+    def test_completed_mother_child_is_a_new_release_in_existing_family(self):
+        parsed = safe.parse_filename(safe.MOTHER_CHILD_COMPLETE_PATH)
+        previous = safe.parse_filename(safe.MOTHER_CHILD_PATH)
+        self.assertEqual(parsed["familyKey"], previous["familyKey"])
+        self.assertEqual(parsed["packId"], previous["packId"])
+        self.assertEqual(parsed["variantId"], "structured")
+        self.assertEqual(parsed["explicitVersion"], "2026.10.10")
+        config = {"packs": [{
+            "packId": previous["packId"],
+            "autoIdentity": {"familyKey": previous["familyKey"]},
+            "currentReleaseId": "v1",
+            "releases": [{"releaseId": "v1", "status": "ACTIVE", "variants": [{
+                "variantId": "linked", "autoIdentity": {"contentFingerprint": "sha256:" + "a" * 64}
+            }]}],
+        }]}
+        inspection = {"contentFingerprint": "b" * 64, "templateFingerprint": "c" * 64, "sha256": "d" * 64}
+        with tempfile.TemporaryDirectory() as directory:
+            action, artifact = safe.sync.classify_and_bind(
+                config, Path(directory), parsed, inspection,
+                "mirrorlious/ankicardsfo1po", "e" * 40,
+                safe.MOTHER_CHILD_COMPLETE_PATH, "OWNER_UPLOAD_ASSERTION", b"verified-apkg-test-bytes",
+            )
+            self.assertEqual(action, "release")
+            self.assertEqual(len(config["packs"]), 1)
+            pack = config["packs"][0]
+            self.assertEqual(pack["currentReleaseId"], "v2")
+            self.assertEqual(pack["releases"][0]["status"], "ARCHIVED")
+            self.assertEqual(pack["releases"][1]["defaultVariantId"], "structured")
+            self.assertTrue(artifact.startswith("artifacts/qy-lsat-criminal-law-parent-child/v2/structured-"))
+            self.assertTrue((Path(directory) / artifact).is_file())
+
     def test_juexiao_basic_packs_keep_owner_requested_identity(self):
         criminal = safe.parse_filename(safe.JUEXIAO_CRIMINAL_PATH)
         civil = safe.parse_filename(safe.JUEXIAO_CIVIL_PATH)
