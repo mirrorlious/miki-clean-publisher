@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "repository": "mirrorlious/miki-clean-publisher",
   "publisher": "mirrorlious",
-  "generatedAt": "2026-10-10T08:13:53.729762+00:00",
+  "generatedAt": "2026-10-10T08:21:20.518616+00:00",
   "packs": [
     {
       "packId": "owner-pack-6aa5b38bbba0",
@@ -141,12 +141,12 @@
     },
     {
       "packId": "qy-lsat-criminal-law-parent-child",
-      "currentReleaseId": "v1",
+      "currentReleaseId": "v2",
       "releases": [
         {
           "releaseId": "v1",
           "displayVersion": "4.5",
-          "status": "ACTIVE",
+          "status": "ARCHIVED",
           "defaultVariantId": "linked",
           "classificationEvidence": {
             "contentFingerprint": "sha256:2ccd363c93f83152b0eecb6eaaee2fb5737d7759c5573f3dd70dfb659a3eab11",
@@ -171,6 +171,45 @@
               "deckCount": 86,
               "version": "2026.10.10+2c5a932f",
               "resourceVersion": "qy-lsat-criminal-law-parent-child-linked-2c5a932fdaa0-780560",
+              "title": "QY 于越刑法母子题",
+              "description": "QY 于越刑法母子题。",
+              "subject": "",
+              "license": "仅供个人学习",
+              "author": "社区分享",
+              "usageHint": "加入后可在 Miki 公共池中安装。",
+              "t1CandidateCount": 0,
+              "blockedTemplateCount": 1
+            }
+          ]
+        },
+        {
+          "releaseId": "v2",
+          "displayVersion": "2026.10.10",
+          "status": "ACTIVE",
+          "defaultVariantId": "structured",
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:117aaf671b5d24b67b30b22ec1177f098be36b860482465d40f0deac92ae38bb",
+            "templateFingerprint": "sha256:18248cedb583b470e4016b60b87899056009b41d85a67b76b27286b3dbcf304d",
+            "autoDecision": "NEW_CONTENT_RELEASE",
+            "basis": "Deterministic Owner Inbox family key matched and semantic content fingerprint changed."
+          },
+          "variants": [
+            {
+              "packId": "qy-lsat-criminal-law-parent-child",
+              "variantId": "structured",
+              "label": "10.10 母子结构补全版",
+              "sourcePath": "artifacts/qy-lsat-criminal-law-parent-child/v2/structured-aed3cea542f1.apkg",
+              "sourceSha256": "aed3cea542f1bd6812804bc0a5bd865fdad3eb5ee522fb5a618cf104d1d391cf",
+              "sourceSizeBytes": 2456883,
+              "contentFingerprint": "sha256:117aaf671b5d24b67b30b22ec1177f098be36b860482465d40f0deac92ae38bb",
+              "templateFingerprint": "sha256:18248cedb583b470e4016b60b87899056009b41d85a67b76b27286b3dbcf304d",
+              "manifestPath": ".miki-qy-lsat-criminal-law-parent-child-structured.manifest.v2.json",
+              "templateReportPath": ".miki-reports/qy-lsat-criminal-law-parent-child-structured.json",
+              "cardCount": 863,
+              "noteCount": 863,
+              "deckCount": 88,
+              "version": "2026.10.10+aed3cea5",
+              "resourceVersion": "qy-lsat-criminal-law-parent-child-structured-aed3cea542f1-2456883",
               "title": "QY 于越刑法母子题",
               "description": "QY 于越刑法母子题。",
               "subject": "",
