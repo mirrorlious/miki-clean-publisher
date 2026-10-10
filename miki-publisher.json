@@ -15,7 +15,7 @@
   "sourceInbox": {
     "repository": "mirrorlious/ankicardsfo1po",
     "branch": "main",
-    "lastSeenCommit": "e6242a52130b37536b5e60413b76fb56908b84cc",
+    "lastSeenCommit": "bd350d3beccc43f462e55779b63f29267b16c4d5",
     "bootstrap": [],
     "denyTokens": [
       "dyl"
@@ -172,12 +172,12 @@
         "familyKey": "qy-yuyue-criminal-law-parent-child",
         "createdBy": "OWNER_INBOX_AUTO_PUBLISH_V1"
       },
-      "currentReleaseId": "v1",
+      "currentReleaseId": "v2",
       "releases": [
         {
           "releaseId": "v1",
           "displayVersion": "4.5",
-          "status": "ACTIVE",
+          "status": "ARCHIVED",
           "defaultVariantId": "linked",
           "classificationEvidence": {
             "contentFingerprint": "sha256:2ccd363c93f83152b0eecb6eaaee2fb5737d7759c5573f3dd70dfb659a3eab11",
@@ -200,6 +200,36 @@
                 "familyKey": "qy-yuyue-criminal-law-parent-child",
                 "contentFingerprint": "sha256:2ccd363c93f83152b0eecb6eaaee2fb5737d7759c5573f3dd70dfb659a3eab11",
                 "templateFingerprint": "sha256:a987fb31a04e60ca9271f1861385e869a9a4b8e9b76030edb297ac5d77bdb603"
+              }
+            }
+          ]
+        },
+        {
+          "releaseId": "v2",
+          "displayVersion": "2026.10.10",
+          "status": "ACTIVE",
+          "defaultVariantId": "structured",
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:117aaf671b5d24b67b30b22ec1177f098be36b860482465d40f0deac92ae38bb",
+            "templateFingerprint": "sha256:18248cedb583b470e4016b60b87899056009b41d85a67b76b27286b3dbcf304d",
+            "autoDecision": "NEW_CONTENT_RELEASE",
+            "basis": "Deterministic Owner Inbox family key matched and semantic content fingerprint changed."
+          },
+          "variants": [
+            {
+              "variantId": "structured",
+              "label": "10.10 母子结构补全版",
+              "sourcePath": "artifacts/qy-lsat-criminal-law-parent-child/v2/structured-aed3cea542f1.apkg",
+              "origin": {
+                "repository": "mirrorlious/ankicardsfo1po",
+                "commit": "5b77e4ed7db4af072fdeb3cea8a1cf338e56a6aa",
+                "path": "QY刑法母子题_母子结构补全版.apkg",
+                "provenance": "OWNER_UPLOAD_ASSERTION"
+              },
+              "autoIdentity": {
+                "familyKey": "qy-yuyue-criminal-law-parent-child",
+                "contentFingerprint": "sha256:117aaf671b5d24b67b30b22ec1177f098be36b860482465d40f0deac92ae38bb",
+                "templateFingerprint": "sha256:18248cedb583b470e4016b60b87899056009b41d85a67b76b27286b3dbcf304d"
               }
             }
           ]
