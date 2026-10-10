@@ -1,0 +1,30 @@
+{
+  "title": "27徐涛强化课阶段测",
+  "packId": "postgrad-politics-xutao-stage-tests",
+  "releaseId": "v1",
+  "variantId": "mobile-compatible",
+  "date": "2026-10-10",
+  "sourceRepository": "mirrorlious/ankicardsfo1po",
+  "sourceCommit": "e7695b0ed5d4ca9fd40d4164d3aa6993c8058a1d",
+  "sourcePath": "27徐涛强化课阶段测.apkg",
+  "artifactPath": "artifacts/postgrad-politics-xutao-stage-tests/v1/mobile-compatible-889075649912.apkg",
+  "sourceSha256": "8890756499126c106aebc153ee37d4b69e5a472f3b22c7693331a1efe3eb5764",
+  "contentFingerprint": "sha256:c4d139d33efcb65d7a396f4b7a72623796e8fe79e9294156951cb30604247871",
+  "templateFingerprint": "sha256:8b341e0f86069ebaced42fb6beee39c077e0cc07917f58b194e5011fd64a23b3",
+  "classification": "same content release; added compatible template variant",
+  "validation": {
+    "publisherTests": 46,
+    "webkitTouchCases": 14,
+    "mikiSanitizedCases": 10,
+    "rawJavascriptRequiredByMiki": false,
+    "mikiSanitizerPolicySource": "web/src/lib/cardHtml.js:CARD_HTML_SANITIZE_OPTIONS",
+    "ankiFreshAndUpdateImportsPassed": true,
+    "existingSchedulingPreserved": true,
+    "otherPackRegistryEntriesUnchanged": true,
+    "oldVariantRetained": true,
+    "cards": 165,
+    "notes": 165,
+    "decks": 5
+  },
+  "changes": "Native details/summary option selection and answer disclosure survive Miki form/input/button/script filtering. AnkiMobile JavaScript enhances grading and reset. Note GUIDs and card IDs are preserved; only option HTML wrappers change."
+}

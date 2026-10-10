@@ -238,12 +238,12 @@
     },
     {
       "packId": "postgrad-politics-xutao-stage-tests",
-      "title": "27政治徐涛强化课阶段测",
-      "description": "27政治徐涛强化课阶段测。",
+      "title": "27徐涛强化课阶段测",
+      "description": "徐涛强化课阶段测，含史纲、思修、马原、毛中特、新思想五科共165题，每科33题。",
       "author": "社区分享",
       "license": "仅供个人学习",
-      "subject": "",
-      "usageHint": "加入后可在 Miki 公共池中安装。",
+      "subject": "考研政治",
+      "usageHint": "选择选项后展开答案与解析；保留五科顺序。",
       "autoIdentity": {
         "familyKey": "postgrad-politics-xutao-stage-tests",
         "createdBy": "OWNER_INBOX_AUTO_PUBLISH_V1"
@@ -254,7 +254,7 @@
           "releaseId": "v1",
           "displayVersion": "2027",
           "status": "ACTIVE",
-          "defaultVariantId": "shuimo",
+          "defaultVariantId": "mobile-compatible",
           "classificationEvidence": {
             "contentFingerprint": "sha256:c4d139d33efcb65d7a396f4b7a72623796e8fe79e9294156951cb30604247871",
             "templateFingerprint": "sha256:07b9e13f8bf49d7f0ee78c8f661240391eef048aa3dea5dce7e12d867e6610c3",
@@ -276,6 +276,22 @@
                 "familyKey": "postgrad-politics-xutao-stage-tests",
                 "contentFingerprint": "sha256:c4d139d33efcb65d7a396f4b7a72623796e8fe79e9294156951cb30604247871",
                 "templateFingerprint": "sha256:07b9e13f8bf49d7f0ee78c8f661240391eef048aa3dea5dce7e12d867e6610c3"
+              }
+            },
+            {
+              "variantId": "mobile-compatible",
+              "label": "水墨青·兼容修复",
+              "sourcePath": "artifacts/postgrad-politics-xutao-stage-tests/v1/mobile-compatible-889075649912.apkg",
+              "origin": {
+                "repository": "mirrorlious/ankicardsfo1po",
+                "commit": "e7695b0ed5d4ca9fd40d4164d3aa6993c8058a1d",
+                "path": "27徐涛强化课阶段测.apkg",
+                "provenance": "OWNER_UPLOAD_ASSERTION"
+              },
+              "autoIdentity": {
+                "familyKey": "postgrad-politics-xutao-stage-tests",
+                "contentFingerprint": "sha256:c4d139d33efcb65d7a396f4b7a72623796e8fe79e9294156951cb30604247871",
+                "templateFingerprint": "sha256:8b341e0f86069ebaced42fb6beee39c077e0cc07917f58b194e5011fd64a23b3"
               }
             }
           ]

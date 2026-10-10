@@ -86,6 +86,15 @@ class CleanZh2000PolicyTest(unittest.TestCase):
         self.assertEqual(civil["title"], "觉晓5000题民法（偏基础）")
         self.assertEqual(civil["packId"], "juexiao-5000-civil-basic")
 
+    def test_renamed_politics_fix_keeps_existing_family(self):
+        old = safe.parse_filename(safe.POLITICS_XUTAO_PATH)
+        fixed = safe.parse_filename(safe.POLITICS_XUTAO_MOBILE_PATH)
+        self.assertEqual(fixed["title"], "27徐涛强化课阶段测")
+        self.assertEqual(fixed["familyKey"], old["familyKey"])
+        self.assertEqual(fixed["packId"], old["packId"])
+        self.assertEqual(old["variantId"], "shuimo")
+        self.assertEqual(fixed["variantId"], "mobile-compatible")
+
     def test_approved_backfills_are_added_once_and_skip_published_origins(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "miki-publisher.json"
