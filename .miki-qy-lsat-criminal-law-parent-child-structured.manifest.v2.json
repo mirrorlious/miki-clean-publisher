@@ -3,9 +3,9 @@
   "packId": "qy-lsat-criminal-law-parent-child",
   "releaseId": "v2",
   "variantId": "structured",
-  "title": "QY 于越刑法母子题",
-  "description": "QY 于越刑法母子题。",
-  "version": "2026.10.10+aed3cea5",
+  "title": "于越刑法母子题",
+  "description": "于越刑法母子题，含863张卡片、88个题组，423道母题、440道子题。",
+  "version": "2026.10.12+aed3cea5",
   "resourceVersion": "qy-lsat-criminal-law-parent-child-structured-aed3cea542f1-2456883",
   "payload": {
     "format": "apkg",
