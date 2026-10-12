@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "mirrorlious/miki-clean-publisher",
-  "feedCommit": "eaebe6044003e12121fb9d92b66f6b4ef34098ec",
+  "feedCommit": "0463db2368d1ef9ed1b46ccbe11f3f0c52e3bf51",
   "feedPath": "miki-public/index.json",
-  "feedSha256": "8cfba66ab121c639b52a03761e23f84af79c406c6b12fc2afe8a181f007c00a4"
+  "feedSha256": "1d5b5c8f5c50d92cc3f60a9d6766ef340fbf518d702b31e55f2766090210995b"
 }
