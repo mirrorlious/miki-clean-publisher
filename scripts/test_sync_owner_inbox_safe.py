@@ -95,6 +95,31 @@ class CleanZh2000PolicyTest(unittest.TestCase):
         self.assertEqual(old["variantId"], "shuimo")
         self.assertEqual(fixed["variantId"], "mobile-compatible")
 
+    def test_canonical_mother_child_name_preserves_current_identity(self):
+        previous = safe.parse_filename(safe.MOTHER_CHILD_COMPLETE_PATH)
+        current = safe.parse_filename(safe.MOTHER_CHILD_CANONICAL_PATH)
+        self.assertEqual(current["title"], "于越刑法母子题")
+        for key in ("packId", "familyKey", "variantId", "explicitVersion"):
+            self.assertEqual(current[key], previous[key])
+
+    def test_retired_backfills_are_removed_and_never_recreated(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "miki-publisher.json"
+            path.write_text(json.dumps({
+                "sourceInbox": {"bootstrap": [
+                    {"sourceCommit": safe.MOTHER_CHILD_COMMIT, "sourcePath": safe.MOTHER_CHILD_PATH},
+                    {"sourceCommit": safe.POLITICS_XUTAO_COMMIT, "sourcePath": safe.POLITICS_XUTAO_PATH},
+                ]},
+                "packs": [],
+            }, ensure_ascii=False), encoding="utf-8")
+            safe.ensure_approved_backfills(path)
+            first = json.loads(path.read_text(encoding="utf-8"))
+            paths = {item["sourcePath"] for item in first["sourceInbox"]["bootstrap"]}
+            self.assertFalse(paths & safe.RETIRED_BACKFILL_PATHS)
+            self.assertEqual(paths, {safe.JUEXIAO_CRIMINAL_PATH, safe.JUEXIAO_CIVIL_PATH})
+            safe.ensure_approved_backfills(path)
+            self.assertEqual(json.loads(path.read_text(encoding="utf-8")), first)
+
     def test_approved_backfills_are_added_once_and_skip_published_origins(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "miki-publisher.json"
@@ -112,11 +137,10 @@ class CleanZh2000PolicyTest(unittest.TestCase):
             }, ensure_ascii=False), encoding="utf-8")
             safe.ensure_approved_backfills(path)
             config = json.loads(path.read_text(encoding="utf-8"))
-            self.assertEqual(len(config["sourceInbox"]["bootstrap"]), 1)
-            self.assertEqual(config["sourceInbox"]["bootstrap"][0]["sourcePath"], safe.MOTHER_CHILD_PATH)
+            self.assertEqual(config["sourceInbox"]["bootstrap"], [])
             safe.ensure_approved_backfills(path)
             config = json.loads(path.read_text(encoding="utf-8"))
-            self.assertEqual(len(config["sourceInbox"]["bootstrap"]), 1)
+            self.assertEqual(config["sourceInbox"]["bootstrap"], [])
 
     def test_public_metadata_hides_internal_owner_copy(self):
         with tempfile.TemporaryDirectory() as directory:

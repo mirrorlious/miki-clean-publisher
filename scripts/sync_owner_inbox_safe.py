@@ -21,6 +21,7 @@ ZH2000_PUBLIC_TITLE = "27法硕 ZH2000 基础+进阶"
 ZH2000_PUBLIC_VARIANT_LABEL = "基础+进阶"
 MOTHER_CHILD_PATH = "QY于越刑法母子题v4.5记忆卡片_母子题跳转版.apkg"
 MOTHER_CHILD_COMPLETE_PATH = "QY刑法母子题_母子结构补全版.apkg"
+MOTHER_CHILD_CANONICAL_PATH = "于越刑法母子题.apkg"
 POLITICS_XUTAO_PATH = "27政治xutao强化课阶段测_水墨青总包_五科01史纲_02思修_03马原_04毛中特_05新思想165题.apkg"
 POLITICS_XUTAO_MOBILE_PATH = "27徐涛强化课阶段测.apkg"
 JUEXIAO_CRIMINAL_PATH = "觉晓5000题刑法（偏基础）.apkg"
@@ -29,11 +30,12 @@ MOTHER_CHILD_COMMIT = "d2d718137426bb693ebdb141c5b7f56c1dbb99cf"
 POLITICS_XUTAO_COMMIT = "806ed26bd6a1b2e74aaa22f08bc0a3d0c76e65b1"
 JUEXIAO_SOURCE_COMMIT = "c2a45c1aec9515664e249b0e4682d24aa46fcc66"
 APPROVED_BACKFILLS = (
-    (MOTHER_CHILD_COMMIT, MOTHER_CHILD_PATH),
-    (POLITICS_XUTAO_COMMIT, POLITICS_XUTAO_PATH),
     (JUEXIAO_SOURCE_COMMIT, JUEXIAO_CRIMINAL_PATH),
     (JUEXIAO_SOURCE_COMMIT, JUEXIAO_CIVIL_PATH),
 )
+# Owner retired these downloads on 2026-10-12. Existing queued backfills must
+# not recreate resources after their variants are removed from the registry.
+RETIRED_BACKFILL_PATHS = frozenset((MOTHER_CHILD_PATH, POLITICS_XUTAO_PATH))
 _ORIGINAL_PARSE_FILENAME = sync.parse_filename
 _FORBIDDEN_DESCRIPTION = "由 Owner Inbox 自动静态审计并发布。"
 
@@ -84,10 +86,10 @@ def parse_filename(path: str) -> dict:
             "variantLabel": "原版",
             "explicitVersion": "",
         }
-    if normalized in (MOTHER_CHILD_PATH, MOTHER_CHILD_COMPLETE_PATH):
-        complete = normalized == MOTHER_CHILD_COMPLETE_PATH
+    if normalized in (MOTHER_CHILD_PATH, MOTHER_CHILD_COMPLETE_PATH, MOTHER_CHILD_CANONICAL_PATH):
+        complete = normalized in (MOTHER_CHILD_COMPLETE_PATH, MOTHER_CHILD_CANONICAL_PATH)
         return {
-            "title": "QY 于越刑法母子题",
+            "title": "于越刑法母子题" if normalized == MOTHER_CHILD_CANONICAL_PATH else "QY 于越刑法母子题",
             "familyKey": "qy-yuyue-criminal-law-parent-child",
             "packId": "qy-lsat-criminal-law-parent-child",
             "variantId": "structured" if complete else "linked",
@@ -128,12 +130,16 @@ def ensure_approved_backfills(config_path: Path) -> None:
     config = json.loads(config_path.read_text(encoding="utf-8"))
     source = config.setdefault("sourceInbox", {})
     published = _published_origin_paths(config)
-    bootstrap = list(source.get("bootstrap") or [])
+    original_bootstrap = list(source.get("bootstrap") or [])
+    bootstrap = [
+        item for item in original_bootstrap
+        if normalize_path(item.get("sourcePath") or "") not in RETIRED_BACKFILL_PATHS
+    ]
     existing = {
         (str(item.get("sourceCommit") or "").lower(), normalize_path(item.get("sourcePath") or ""))
         for item in bootstrap
     }
-    changed = False
+    changed = bootstrap != original_bootstrap
     for commit, path in APPROVED_BACKFILLS:
         normalized_path = normalize_path(path)
         key = (commit, normalized_path)

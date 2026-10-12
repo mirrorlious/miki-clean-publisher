@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-12",
+  "requestedNames": [
+    "27徐涛强化课阶段测",
+    "于越刑法母子题"
+  ],
+  "policy": "current releases and variants only; no historical public download entries",
+  "resourceIdsPreserved": [
+    "postgrad-politics-xutao-stage-tests",
+    "qy-lsat-criminal-law-parent-child"
+  ],
+  "currentSha256Preserved": [
+    "8890756499126c106aebc153ee37d4b69e5a472f3b22c7693331a1efe3eb5764",
+    "aed3cea542f1bd6812804bc0a5bd865fdad3eb5ee522fb5a618cf104d1d391cf"
+  ],
+  "validation": {
+    "cleanPublisherTests": 48,
+    "inboxPublisherTests": 23,
+    "unchangedOtherPackRegistryEntries": 5,
+    "oldBackfillsDisabled": true,
+    "currentNotesCardsAndDecksUnchanged": true
+  },
+  "removedPaths": [
+    "artifacts/qy-lsat-criminal-law-parent-child/v1/linked-2c5a932fdaa0.apkg",
+    "artifacts/postgrad-politics-xutao-stage-tests/v1/shuimo-c2eb6fa8174a.apkg",
+    ".miki-postgrad-politics-xutao-stage-tests-shuimo.manifest.v2.json",
+    ".miki-qy-lsat-criminal-law-parent-child-linked.manifest.v2.json",
+    ".miki-reports/postgrad-politics-xutao-stage-tests-shuimo.json",
+    ".miki-reports/qy-lsat-criminal-law-parent-child-linked.json"
+  ],
+  "sourceRename": {
+    "from": "QY刑法母子题_母子结构补全版.apkg",
+    "to": "于越刑法母子题.apkg",
+    "blob": "2aadaca13c54b0cd0543a62aa5e5a06e649a4c1b"
+  }
+}
