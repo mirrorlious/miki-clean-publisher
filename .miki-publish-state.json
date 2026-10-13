@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "repository": "mirrorlious/miki-clean-publisher",
   "publisher": "mirrorlious",
-  "generatedAt": "2026-10-12T13:47:40.405687+00:00",
+  "generatedAt": "2026-10-13T05:46:03.390461+00:00",
   "packs": [
     {
       "packId": "owner-pack-6aa5b38bbba0",
@@ -34,7 +34,7 @@
               "cardCount": 180,
               "noteCount": 180,
               "deckCount": 3,
-              "version": "2026.10.12+1fa43b73",
+              "version": "2026.10.13+1fa43b73",
               "resourceVersion": "owner-pack-6aa5b38bbba0-shuimo-1fa43b734795-137221",
               "title": "2027法硕法基强化题",
               "description": "2027法硕法基强化题。",
@@ -79,7 +79,7 @@
               "cardCount": 330,
               "noteCount": 330,
               "deckCount": 18,
-              "version": "2026.10.12+230e5dde",
+              "version": "2026.10.13+230e5dde",
               "resourceVersion": "owner-pack-94b82faa40c4-original-230e5dde8c00-143984",
               "title": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)",
               "description": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)。",
@@ -124,7 +124,7 @@
               "cardCount": 2090,
               "noteCount": 2090,
               "deckCount": 281,
-              "version": "2026.10.12+e642031c",
+              "version": "2026.10.13+e642031c",
               "resourceVersion": "zh2000-clean-clean-e642031cf170-1143561",
               "title": "27法硕 ZH2000 基础+进阶",
               "description": "27法硕 ZH2000 基础+进阶。",
@@ -169,7 +169,7 @@
               "cardCount": 863,
               "noteCount": 863,
               "deckCount": 88,
-              "version": "2026.10.12+aed3cea5",
+              "version": "2026.10.13+aed3cea5",
               "resourceVersion": "qy-lsat-criminal-law-parent-child-structured-aed3cea542f1-2456883",
               "title": "于越刑法母子题",
               "description": "于越刑法母子题，含863张卡片、88个题组，423道母题、440道子题。",
@@ -214,7 +214,7 @@
               "cardCount": 165,
               "noteCount": 165,
               "deckCount": 5,
-              "version": "2026.10.12+88907564",
+              "version": "2026.10.13+88907564",
               "resourceVersion": "postgrad-politics-xutao-stage-tests-mobile-compatible-889075649912-98291",
               "title": "27徐涛强化课阶段测",
               "description": "徐涛强化课阶段测，含史纲、思修、马原、毛中特、新思想五科共165题，每科33题。",
@@ -259,7 +259,7 @@
               "cardCount": 1042,
               "noteCount": 1042,
               "deckCount": 25,
-              "version": "2026.10.12+62cb8f93",
+              "version": "2026.10.13+62cb8f93",
               "resourceVersion": "juexiao-5000-criminal-basic-original-62cb8f935516-568662",
               "title": "觉晓5000题刑法（偏基础）",
               "description": "觉晓5000题刑法（偏基础）。",
@@ -304,7 +304,7 @@
               "cardCount": 1265,
               "noteCount": 1265,
               "deckCount": 34,
-              "version": "2026.10.12+10750728",
+              "version": "2026.10.13+10750728",
               "resourceVersion": "juexiao-5000-civil-basic-original-107507282ff0-683861",
               "title": "觉晓5000题民法（偏基础）",
               "description": "觉晓5000题民法（偏基础）。",
@@ -313,6 +313,96 @@
               "author": "社区分享",
               "usageHint": "加入后可在 Miki 公共池中安装。",
               "t1CandidateCount": 0,
+              "blockedTemplateCount": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "packId": "owner-pack-35b33126ad6a",
+      "currentReleaseId": "v1",
+      "releases": [
+        {
+          "releaseId": "v1",
+          "displayVersion": "1",
+          "status": "ACTIVE",
+          "defaultVariantId": "original",
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:47750226351cc4cd5bad8d26a1b409cbd345b1a7c9a0b206b48b535632233913",
+            "templateFingerprint": "sha256:0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4",
+            "autoDecision": "NEW_FAMILY",
+            "basis": "No existing semantic-content or deterministic-family-key match."
+          },
+          "variants": [
+            {
+              "packId": "owner-pack-35b33126ad6a",
+              "variantId": "original",
+              "label": "原版",
+              "sourcePath": "artifacts/owner-pack-35b33126ad6a/v1/original-405eb6f8fabe.apkg",
+              "sourceSha256": "405eb6f8fabe54725fb4434f9e3041d3978ab9b6a57737d5ac1e1c5c8f095a8c",
+              "sourceSizeBytes": 23542138,
+              "contentFingerprint": "sha256:47750226351cc4cd5bad8d26a1b409cbd345b1a7c9a0b206b48b535632233913",
+              "templateFingerprint": "sha256:0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4",
+              "manifestPath": ".miki-owner-pack-35b33126ad6a-original.manifest.v2.json",
+              "templateReportPath": ".miki-reports/owner-pack-35b33126ad6a-original.json",
+              "cardCount": 1172,
+              "noteCount": 1172,
+              "deckCount": 15,
+              "version": "2026.10.13+405eb6f8",
+              "resourceVersion": "owner-pack-35b33126ad6a-original-405eb6f8fabe-23542138",
+              "title": "27肖1000政治anki卡组",
+              "description": "27肖1000政治anki卡组。",
+              "subject": "",
+              "license": "仅供个人学习",
+              "author": "社区分享",
+              "usageHint": "加入后可在 Miki 公共池中安装。",
+              "t1CandidateCount": 5,
+              "blockedTemplateCount": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "packId": "owner-pack-974c137c363d",
+      "currentReleaseId": "v1",
+      "releases": [
+        {
+          "releaseId": "v1",
+          "displayVersion": "1",
+          "status": "ACTIVE",
+          "defaultVariantId": "original",
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:950ca6b2aa7f789813b39840d546b7cd5b7fcc304474e41e8261132088b5ffa0",
+            "templateFingerprint": "sha256:0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4",
+            "autoDecision": "NEW_FAMILY",
+            "basis": "No existing semantic-content or deterministic-family-key match."
+          },
+          "variants": [
+            {
+              "packId": "owner-pack-974c137c363d",
+              "variantId": "original",
+              "label": "原版",
+              "sourcePath": "artifacts/owner-pack-974c137c363d/v1/original-4e0ddd2c4820.apkg",
+              "sourceSha256": "4e0ddd2c48209c5777a010b6ccf47d2fe26758a4c6b071155f10b84d0fb2f676",
+              "sourceSizeBytes": 793805,
+              "contentFingerprint": "sha256:950ca6b2aa7f789813b39840d546b7cd5b7fcc304474e41e8261132088b5ffa0",
+              "templateFingerprint": "sha256:0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4",
+              "manifestPath": ".miki-owner-pack-974c137c363d-original.manifest.v2.json",
+              "templateReportPath": ".miki-reports/owner-pack-974c137c363d-original.json",
+              "cardCount": 1172,
+              "noteCount": 1172,
+              "deckCount": 15,
+              "version": "2026.10.13+4e0ddd2c",
+              "resourceVersion": "owner-pack-974c137c363d-original-4e0ddd2c4820-793805",
+              "title": "27肖1000政治anki卡组_纯文字解析",
+              "description": "27肖1000政治anki卡组_纯文字解析。",
+              "subject": "",
+              "license": "仅供个人学习",
+              "author": "社区分享",
+              "usageHint": "加入后可在 Miki 公共池中安装。",
+              "t1CandidateCount": 5,
               "blockedTemplateCount": 0
             }
           ]
