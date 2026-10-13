@@ -1,0 +1,35 @@
+{
+  "title": "27肖1000政治anki卡组",
+  "sourceInboxCommit": "d4cac6444a04c0e7010ef94e67305f87a7f200a9",
+  "cardCount": 1172,
+  "multipleChoiceCount": 1148,
+  "materialAnalysisCount": 24,
+  "verification": {
+    "fullSourceLinesReRecognized": 21312,
+    "thirdPassDifferenceLines": 1054,
+    "meaningfulContentLineCorrections": 409,
+    "unresolvedDetectedDifferences": 0,
+    "matchingNoteGUIDs": 1172,
+    "questionOptionAnswerAgreement": true,
+    "pureTextMediaCount": 0,
+    "regressionHistoryMulti11A": "农民具有伟大的革命潜力",
+    "desktopAndMobilePreviewPassed": true,
+    "limitation": "OCR cross-checks and manual review of detected discrepancies do not constitute manual proofreading of every character."
+  },
+  "variants": {
+    "image": {
+      "sha256": "405eb6f8fabe54725fb4434f9e3041d3978ab9b6a57737d5ac1e1c5c8f095a8c",
+      "sizeBytes": 23542138,
+      "cardCount": 1172,
+      "contentFingerprint": "47750226351cc4cd5bad8d26a1b409cbd345b1a7c9a0b206b48b535632233913",
+      "templateFingerprint": "0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4"
+    },
+    "text": {
+      "sha256": "4e0ddd2c48209c5777a010b6ccf47d2fe26758a4c6b071155f10b84d0fb2f676",
+      "sizeBytes": 793805,
+      "cardCount": 1172,
+      "contentFingerprint": "950ca6b2aa7f789813b39840d546b7cd5b7fcc304474e41e8261132088b5ffa0",
+      "templateFingerprint": "0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4"
+    }
+  }
+}

@@ -51,3 +51,7 @@ Miki must fetch the feed at that immutable commit and verify its digest before p
 - `scripts/publish_latest_pointer.py` — latest-pointer generator.
 - `.github/workflows/miki-owner-publisher.yml` — PR validation, five-minute polling and publication workflow.
 <!-- manual-owner-inbox-refresh: 2026-10-09-juexiao-5000 -->
+
+## 27肖1000政治anki卡组
+
+五科1172题，统一名称；同一发布版本提供“纯文字解析”和“图片解析”，默认纯文字。两版题目、选项、答案和笔记GUID一致，解析呈现不同，分别保留真实内容指纹及文件SHA256。史纲“苹命”已修正为“革命”。校验记录见 [文字校验记录](audits/xiao1000-2027/text-verification.json)。
