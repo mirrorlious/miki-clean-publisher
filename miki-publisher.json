@@ -347,36 +347,26 @@
     {
       "packId": "owner-pack-35b33126ad6a",
       "title": "27肖1000政治anki卡组",
-      "description": "27肖1000政治anki卡组。",
-      "author": "社区分享",
+      "description": "五科1172题，含1148道选择题与24道材料分析题；提供图片解析和纯文字解析两个版本。",
+      "subject": "考研政治",
+      "author": "肖秀荣 / 用户整理",
       "license": "仅供个人学习",
-      "subject": "",
-      "usageHint": "加入后可在 Miki 公共池中安装。",
-      "autoIdentity": {
-        "familyKey": "27肖1000政治anki卡组",
-        "createdBy": "OWNER_INBOX_AUTO_PUBLISH_V1"
-      },
+      "usageHint": "按科目、题型和章节复习；两个版本题目与答案一致，可按阅读习惯选择解析形式。",
       "currentReleaseId": "v1",
       "releases": [
         {
           "releaseId": "v1",
-          "displayVersion": "1",
+          "displayVersion": "2027",
           "status": "ACTIVE",
-          "defaultVariantId": "original",
-          "classificationEvidence": {
-            "contentFingerprint": "sha256:47750226351cc4cd5bad8d26a1b409cbd345b1a7c9a0b206b48b535632233913",
-            "templateFingerprint": "sha256:0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4",
-            "autoDecision": "NEW_FAMILY",
-            "basis": "No existing semantic-content or deterministic-family-key match."
-          },
+          "defaultVariantId": "text",
           "variants": [
             {
-              "variantId": "original",
-              "label": "原版",
-              "sourcePath": "artifacts/owner-pack-35b33126ad6a/v1/original-405eb6f8fabe.apkg",
+              "variantId": "image",
+              "label": "图片解析",
+              "sourcePath": "artifacts/owner-pack-35b33126ad6a/v1/image-405eb6f8fabe.apkg",
               "origin": {
                 "repository": "mirrorlious/ankicardsfo1po",
-                "commit": "05d33dfe3972d5260a8c36cabce9d1dbea5335ef",
+                "commit": "d4cac6444a04c0e7010ef94e67305f87a7f200a9",
                 "path": "27肖1000政治anki卡组.apkg",
                 "provenance": "OWNER_UPLOAD_ASSERTION"
               },
@@ -385,56 +375,36 @@
                 "contentFingerprint": "sha256:47750226351cc4cd5bad8d26a1b409cbd345b1a7c9a0b206b48b535632233913",
                 "templateFingerprint": "sha256:0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4"
               }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "packId": "owner-pack-974c137c363d",
-      "title": "27肖1000政治anki卡组_纯文字解析",
-      "description": "27肖1000政治anki卡组_纯文字解析。",
-      "author": "社区分享",
-      "license": "仅供个人学习",
-      "subject": "",
-      "usageHint": "加入后可在 Miki 公共池中安装。",
-      "autoIdentity": {
-        "familyKey": "27肖1000政治anki卡组纯文字解析",
-        "createdBy": "OWNER_INBOX_AUTO_PUBLISH_V1"
-      },
-      "currentReleaseId": "v1",
-      "releases": [
-        {
-          "releaseId": "v1",
-          "displayVersion": "1",
-          "status": "ACTIVE",
-          "defaultVariantId": "original",
-          "classificationEvidence": {
-            "contentFingerprint": "sha256:950ca6b2aa7f789813b39840d546b7cd5b7fcc304474e41e8261132088b5ffa0",
-            "templateFingerprint": "sha256:0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4",
-            "autoDecision": "NEW_FAMILY",
-            "basis": "No existing semantic-content or deterministic-family-key match."
-          },
-          "variants": [
+            },
             {
-              "variantId": "original",
-              "label": "原版",
-              "sourcePath": "artifacts/owner-pack-974c137c363d/v1/original-4e0ddd2c4820.apkg",
+              "variantId": "text",
+              "label": "纯文字解析",
+              "sourcePath": "artifacts/owner-pack-35b33126ad6a/v1/text-4e0ddd2c4820.apkg",
               "origin": {
                 "repository": "mirrorlious/ankicardsfo1po",
-                "commit": "05d33dfe3972d5260a8c36cabce9d1dbea5335ef",
+                "commit": "d4cac6444a04c0e7010ef94e67305f87a7f200a9",
                 "path": "27肖1000政治anki卡组_纯文字解析.apkg",
                 "provenance": "OWNER_UPLOAD_ASSERTION"
               },
               "autoIdentity": {
-                "familyKey": "27肖1000政治anki卡组纯文字解析",
+                "familyKey": "27肖1000政治anki卡组",
                 "contentFingerprint": "sha256:950ca6b2aa7f789813b39840d546b7cd5b7fcc304474e41e8261132088b5ffa0",
                 "templateFingerprint": "sha256:0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4"
               }
             }
-          ]
+          ],
+          "classificationEvidence": {
+            "contentFingerprint": "sha256:950ca6b2aa7f789813b39840d546b7cd5b7fcc304474e41e8261132088b5ffa0",
+            "templateFingerprint": "sha256:0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4",
+            "autoDecision": "OWNER_CONFIRMED_REPRESENTATION_VARIANTS",
+            "basis": "Owner explicitly requested image and pure-text explanations to coexist. 1172 matching note GUIDs; question, options and answer fields match exactly. Distinct representation fingerprints retained per variant."
+          }
         }
-      ]
+      ],
+      "autoIdentity": {
+        "familyKey": "27肖1000政治anki卡组",
+        "createdBy": "OWNER_CONFIRMED_REPRESENTATION_VARIANTS"
+      }
     }
   ],
   "pendingClassification": []
