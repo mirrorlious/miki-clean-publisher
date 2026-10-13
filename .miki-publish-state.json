@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "repository": "mirrorlious/miki-clean-publisher",
   "publisher": "mirrorlious",
-  "generatedAt": "2026-10-13T05:46:03.390461+00:00",
+  "generatedAt": "2026-10-13T05:49:00.816165+00:00",
   "packs": [
     {
       "packId": "owner-pack-6aa5b38bbba0",
@@ -325,83 +325,63 @@
       "releases": [
         {
           "releaseId": "v1",
-          "displayVersion": "1",
+          "displayVersion": "2027",
           "status": "ACTIVE",
-          "defaultVariantId": "original",
+          "defaultVariantId": "text",
           "classificationEvidence": {
-            "contentFingerprint": "sha256:47750226351cc4cd5bad8d26a1b409cbd345b1a7c9a0b206b48b535632233913",
+            "contentFingerprint": "sha256:950ca6b2aa7f789813b39840d546b7cd5b7fcc304474e41e8261132088b5ffa0",
             "templateFingerprint": "sha256:0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4",
-            "autoDecision": "NEW_FAMILY",
-            "basis": "No existing semantic-content or deterministic-family-key match."
+            "autoDecision": "OWNER_CONFIRMED_REPRESENTATION_VARIANTS",
+            "basis": "Owner explicitly requested image and pure-text explanations to coexist. 1172 matching note GUIDs; question, options and answer fields match exactly. Distinct representation fingerprints retained per variant."
           },
           "variants": [
             {
               "packId": "owner-pack-35b33126ad6a",
-              "variantId": "original",
-              "label": "原版",
-              "sourcePath": "artifacts/owner-pack-35b33126ad6a/v1/original-405eb6f8fabe.apkg",
+              "variantId": "image",
+              "label": "图片解析",
+              "sourcePath": "artifacts/owner-pack-35b33126ad6a/v1/image-405eb6f8fabe.apkg",
               "sourceSha256": "405eb6f8fabe54725fb4434f9e3041d3978ab9b6a57737d5ac1e1c5c8f095a8c",
               "sourceSizeBytes": 23542138,
               "contentFingerprint": "sha256:47750226351cc4cd5bad8d26a1b409cbd345b1a7c9a0b206b48b535632233913",
               "templateFingerprint": "sha256:0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4",
-              "manifestPath": ".miki-owner-pack-35b33126ad6a-original.manifest.v2.json",
-              "templateReportPath": ".miki-reports/owner-pack-35b33126ad6a-original.json",
+              "manifestPath": ".miki-owner-pack-35b33126ad6a-image.manifest.v2.json",
+              "templateReportPath": ".miki-reports/owner-pack-35b33126ad6a-image.json",
               "cardCount": 1172,
               "noteCount": 1172,
               "deckCount": 15,
               "version": "2026.10.13+405eb6f8",
-              "resourceVersion": "owner-pack-35b33126ad6a-original-405eb6f8fabe-23542138",
+              "resourceVersion": "owner-pack-35b33126ad6a-image-405eb6f8fabe-23542138",
               "title": "27肖1000政治anki卡组",
-              "description": "27肖1000政治anki卡组。",
-              "subject": "",
+              "description": "五科1172题，含1148道选择题与24道材料分析题；提供图片解析和纯文字解析两个版本。",
+              "subject": "考研政治",
               "license": "仅供个人学习",
-              "author": "社区分享",
-              "usageHint": "加入后可在 Miki 公共池中安装。",
+              "author": "肖秀荣 / 用户整理",
+              "usageHint": "按科目、题型和章节复习；两个版本题目与答案一致，可按阅读习惯选择解析形式。",
               "t1CandidateCount": 5,
               "blockedTemplateCount": 0
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "packId": "owner-pack-974c137c363d",
-      "currentReleaseId": "v1",
-      "releases": [
-        {
-          "releaseId": "v1",
-          "displayVersion": "1",
-          "status": "ACTIVE",
-          "defaultVariantId": "original",
-          "classificationEvidence": {
-            "contentFingerprint": "sha256:950ca6b2aa7f789813b39840d546b7cd5b7fcc304474e41e8261132088b5ffa0",
-            "templateFingerprint": "sha256:0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4",
-            "autoDecision": "NEW_FAMILY",
-            "basis": "No existing semantic-content or deterministic-family-key match."
-          },
-          "variants": [
+            },
             {
-              "packId": "owner-pack-974c137c363d",
-              "variantId": "original",
-              "label": "原版",
-              "sourcePath": "artifacts/owner-pack-974c137c363d/v1/original-4e0ddd2c4820.apkg",
+              "packId": "owner-pack-35b33126ad6a",
+              "variantId": "text",
+              "label": "纯文字解析",
+              "sourcePath": "artifacts/owner-pack-35b33126ad6a/v1/text-4e0ddd2c4820.apkg",
               "sourceSha256": "4e0ddd2c48209c5777a010b6ccf47d2fe26758a4c6b071155f10b84d0fb2f676",
               "sourceSizeBytes": 793805,
               "contentFingerprint": "sha256:950ca6b2aa7f789813b39840d546b7cd5b7fcc304474e41e8261132088b5ffa0",
               "templateFingerprint": "sha256:0c0dc3ec98d643af3202c1020a075d4b25f38b52bb63614e7124796e998999c4",
-              "manifestPath": ".miki-owner-pack-974c137c363d-original.manifest.v2.json",
-              "templateReportPath": ".miki-reports/owner-pack-974c137c363d-original.json",
+              "manifestPath": ".miki-owner-pack-35b33126ad6a-text.manifest.v2.json",
+              "templateReportPath": ".miki-reports/owner-pack-35b33126ad6a-text.json",
               "cardCount": 1172,
               "noteCount": 1172,
               "deckCount": 15,
               "version": "2026.10.13+4e0ddd2c",
-              "resourceVersion": "owner-pack-974c137c363d-original-4e0ddd2c4820-793805",
-              "title": "27肖1000政治anki卡组_纯文字解析",
-              "description": "27肖1000政治anki卡组_纯文字解析。",
-              "subject": "",
+              "resourceVersion": "owner-pack-35b33126ad6a-text-4e0ddd2c4820-793805",
+              "title": "27肖1000政治anki卡组",
+              "description": "五科1172题，含1148道选择题与24道材料分析题；提供图片解析和纯文字解析两个版本。",
+              "subject": "考研政治",
               "license": "仅供个人学习",
-              "author": "社区分享",
-              "usageHint": "加入后可在 Miki 公共池中安装。",
+              "author": "肖秀荣 / 用户整理",
+              "usageHint": "按科目、题型和章节复习；两个版本题目与答案一致，可按阅读习惯选择解析形式。",
               "t1CandidateCount": 5,
               "blockedTemplateCount": 0
             }

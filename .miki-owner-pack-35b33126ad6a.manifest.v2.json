@@ -2,11 +2,11 @@
   "schemaVersion": 2,
   "packId": "owner-pack-35b33126ad6a",
   "releaseId": "v1",
-  "variantId": "original",
+  "variantId": "text",
   "title": "27肖1000政治anki卡组",
-  "description": "27肖1000政治anki卡组。",
-  "version": "2026.10.13+405eb6f8",
-  "resourceVersion": "owner-pack-35b33126ad6a-original-405eb6f8fabe-23542138",
+  "description": "五科1172题，含1148道选择题与24道材料分析题；提供图片解析和纯文字解析两个版本。",
+  "version": "2026.10.13+4e0ddd2c",
+  "resourceVersion": "owner-pack-35b33126ad6a-text-4e0ddd2c4820-793805",
   "payload": {
     "format": "apkg",
     "entryResourceIds": [
@@ -28,12 +28,12 @@
     {
       "id": "source-apkg",
       "role": "apkg",
-      "path": "artifacts/owner-pack-35b33126ad6a/v1/original-405eb6f8fabe.apkg",
+      "path": "artifacts/owner-pack-35b33126ad6a/v1/text-4e0ddd2c4820.apkg",
       "mediaType": "application/octet-stream",
-      "sizeBytes": 23542138,
+      "sizeBytes": 793805,
       "integrity": {
         "algorithm": "sha256",
-        "digest": "405eb6f8fabe54725fb4434f9e3041d3978ab9b6a57737d5ac1e1c5c8f095a8c"
+        "digest": "4e0ddd2c48209c5777a010b6ccf47d2fe26758a4c6b071155f10b84d0fb2f676"
       },
       "cachePolicy": "immutable"
     }
