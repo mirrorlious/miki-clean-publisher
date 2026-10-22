@@ -7,6 +7,25 @@ import re
 from pathlib import Path
 
 
+def candidate_fields(root: Path, item: dict) -> dict:
+    registry_path = root / "miki-preview-candidates.json"
+    if not registry_path.exists():
+        return {}
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    renderer = registry.get("renderer", {})
+    if (registry.get("schemaVersion") != 1 or renderer.get("repository") != "mirrorlious/miki-"
+            or not re.fullmatch(r"[a-f0-9]{40}", renderer.get("commit", ""))):
+        raise ValueError("Unverified preview renderer provenance")
+    keys = ("packId", "releaseId", "variantId", "sourceSha256", "resourceVersion")
+    matches = [entry for entry in registry.get("entries", []) if all(entry.get(key) == item.get(key) for key in keys)]
+    if len(matches) > 1:
+        raise ValueError("Ambiguous sample candidate")
+    if not matches:
+        return {}
+    preview = verified_preview(root, {**item, "preview": matches[0]["preview"]})
+    return {"preview": preview, "hasAnalysis": matches[0].get("hasAnalysis") is True}
+
+
 def verified_preview(root: Path, item: dict) -> dict | None:
     descriptor = item.get("preview")
     if descriptor is None:

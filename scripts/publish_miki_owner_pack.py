@@ -543,6 +543,11 @@ def build_variant(config: dict, source: Path, pack: dict, release: dict, variant
         dump_json(ROOT / f".miki-{metadata['packId']}.manifest.v2.json", manifest)
         dump_json(ROOT / f".miki-reports/{metadata['packId']}.json", report)
 
+    from public_pool_preview import candidate_fields
+    preview_fields = candidate_fields(ROOT, {
+        **metadata, "sourceSha256": inspection["sha256"], "resourceVersion": resource_version,
+    }) if release.get("status") == "ACTIVE" and release["releaseId"] == pack.get("currentReleaseId") else {}
+
     return {
         **metadata,
         "version": version,
@@ -559,6 +564,7 @@ def build_variant(config: dict, source: Path, pack: dict, release: dict, variant
         "templateFingerprint": inspection["templateFingerprint"],
         "t1CandidateCount": report["summary"]["t1CandidateCount"],
         "blockedTemplateCount": report["summary"]["blockedTemplateCount"],
+        **preview_fields,
     }
 
 
@@ -638,6 +644,7 @@ def build_with_config(config: dict) -> None:
                     "author": built["author"],
                     "usageHint": built["usageHint"],
                     **({"versionYear": built["versionYear"]} if built.get("versionYear") else {}),
+                    **({"preview": built["preview"], "hasAnalysis": built.get("hasAnalysis", False)} if built.get("preview") else {}),
                     "t1CandidateCount": built["t1CandidateCount"],
                     "blockedTemplateCount": built["blockedTemplateCount"],
                 })

@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from public_pool_preview import verified_preview
+from public_pool_preview import candidate_fields, verified_preview
 
 
 class PublicPoolPreviewTest(unittest.TestCase):
@@ -51,6 +51,20 @@ class PublicPoolPreviewTest(unittest.TestCase):
         self.write_sample()
         with self.assertRaises(ValueError):
             verified_preview(self.root, self.item)
+
+    def test_candidate_binds_exact_source_release_variant_and_renderer(self):
+        self.write_sample()
+        self.item.update(releaseId="v1", variantId="original", sourceSha256="b" * 64)
+        registry = {"schemaVersion": 1, "renderer": {"repository": "mirrorlious/miki-", "commit": "a" * 40}, "entries": [dict(self.item)]}
+        target = self.root / "miki-preview-candidates.json"
+        target.write_text(json.dumps(registry), encoding="utf-8")
+        self.assertEqual(candidate_fields(self.root, self.item)["preview"], self.item["preview"])
+        self.assertEqual(candidate_fields(self.root, {**self.item, "sourceSha256": "c" * 64}), {})
+        self.assertEqual(candidate_fields(self.root, {**self.item, "variantId": "other"}), {})
+        registry["entries"] *= 2
+        target.write_text(json.dumps(registry), encoding="utf-8")
+        with self.assertRaises(ValueError):
+            candidate_fields(self.root, self.item)
         del self.payload["cards"][0]["review"]
         self.payload["chapters"] *= 129
         self.write_sample()

@@ -54,10 +54,15 @@ Miki must fetch the feed at that immutable commit and verify its digest before p
 
 ## Bounded Public Pool previews
 
-The remote workflow materializes presentation-only preview files through an
-immutable revision of Miki's existing APKG parser and static renderer. It never
-executes source template JavaScript. Only current ACTIVE variants get samples;
-the original APKG bytes, fingerprints and access semantics are unchanged.
+Presentation-only candidate files are materialized with an immutable revision
+of Miki's existing APKG parser and static renderer, without executing source
+template JavaScript. `miki-preview-candidates.json` records renderer provenance,
+pack/release/variant identity and the exact source APKG SHA256. The remote
+workflow independently validates candidates and promotes only those matching
+the current accepted ACTIVE variant. Changed/new sources without a matching
+candidate stay installable and expose no stale preview. This avoids any new
+cross-repository credential. Original APKG bytes, fingerprints and access
+semantics are unchanged.
 
 Each content-addressed `miki-public/previews/<sha256>.preview.json` has 3–5
 sample cards, at most 128 KiB, and an actual deck-derived chapter directory
