@@ -3,6 +3,7 @@
   "repository": "mirrorlious/miki-clean-publisher",
   "publisher": "mirrorlious",
   "defaults": {
+    "versionYear": 2027,
     "author": "原卡作者",
     "license": "仅供个人学习",
     "subject": "",

@@ -23,6 +23,9 @@ concurrency:
   group: miki-clean-owner-publisher-${{ github.ref }}
   cancel-in-progress: false
 
+env:
+  MIKI_PREVIEW_RENDERER_COMMIT: 3af226f4adbfed6b8be1372b01afb40808d62560
+
 jobs:
   validate:
     name: Validate Clean Publisher
@@ -39,6 +42,19 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Checkout immutable preview renderer
+        uses: actions/checkout@v4
+        with:
+          repository: mirrorlious/miki-
+          ref: ${{ env.MIKI_PREVIEW_RENDERER_COMMIT }}
+          path: .miki-preview-renderer
+          persist-credentials: false
+      - name: Setup Node for static sample materialization
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install exact renderer dependencies
+        run: npm ci --prefix .miki-preview-renderer/web
       - name: Install Anki21b decompression support
         run: python -m pip install --disable-pip-version-check --no-input zstandard==0.23.0
       - name: Compile publisher
@@ -58,6 +74,7 @@ jobs:
           scripts/test_sync_owner_inbox.py
           scripts/test_sync_owner_inbox_safe.py
           scripts/test_publish_latest_pointer.py
+          scripts/test_public_pool_preview.py
       - name: Stage Owner Inbox candidates in validation workspace
         id: inbox
         run: python scripts/sync_owner_inbox_safe.py --source-dir "$RUNNER_TEMP/miki-owner-inbox" --json
@@ -66,11 +83,16 @@ jobs:
           export MIKI_RELEASE_DATE="$(date -u +%Y%m%d)"
           python scripts/miki_owner_publisher.py build
           python scripts/compile_miki_owner_t1.py
+      - name: Materialize bounded static samples and chapter directories
+        run: node .miki-preview-renderer/web/scripts/prepare-public-pool-previews.mjs --publisher-root "$GITHUB_WORKSPACE"
       - name: Validate generated trust boundary
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
+          import sys
+          sys.path.insert(0, 'scripts')
+          from public_pool_preview import verified_preview
 
           config = json.loads(Path('miki-publisher.json').read_text(encoding='utf-8'))
           state = json.loads(Path('.miki-publish-state.json').read_text(encoding='utf-8'))
@@ -98,6 +120,8 @@ jobs:
           for family in state['packs']:
               for release in family['releases']:
                   for variant in release['variants']:
+                      if release['status'] == 'ACTIVE' and release['releaseId'] == family['currentReleaseId']:
+                          assert verified_preview(Path('.'), variant), 'current variant must have a verified bounded sample'
                       assert variant['sourcePath'] in configured_sources
                       manifest = json.loads(Path(variant['manifestPath']).read_text(encoding='utf-8'))
                       report = json.loads(Path(variant['templateReportPath']).read_text(encoding='utf-8'))
@@ -140,6 +164,19 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Checkout immutable preview renderer
+        uses: actions/checkout@v4
+        with:
+          repository: mirrorlious/miki-
+          ref: ${{ env.MIKI_PREVIEW_RENDERER_COMMIT }}
+          path: .miki-preview-renderer
+          persist-credentials: false
+      - name: Setup Node for static sample materialization
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install exact renderer dependencies
+        run: npm ci --prefix .miki-preview-renderer/web
       - name: Install Anki21b decompression support
         run: python -m pip install --disable-pip-version-check --no-input zstandard==0.23.0
       - name: Configure publisher identity
@@ -183,7 +220,8 @@ jobs:
         if: steps.decision.outputs.publish_needed == 'true'
         id: manifest_commit
         run: |
-          git add -- '.miki-'*.manifest.v2.json '.miki-reports/' '.miki-publish-state.json'
+          node .miki-preview-renderer/web/scripts/prepare-public-pool-previews.mjs --publisher-root "$GITHUB_WORKSPACE"
+          git add -- '.miki-'*.manifest.v2.json '.miki-reports/' '.miki-publish-state.json' 'miki-public/previews/'
           if git diff --cached --quiet; then
             echo "No manifest changes detected."
           else
