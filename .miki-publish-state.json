@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "repository": "mirrorlious/miki-clean-publisher",
   "publisher": "mirrorlious",
-  "generatedAt": "2026-10-13T05:49:00.816165+00:00",
+  "generatedAt": "2026-10-22T05:25:47.963193+00:00",
   "packs": [
     {
       "packId": "owner-pack-6aa5b38bbba0",
@@ -34,7 +34,7 @@
               "cardCount": 180,
               "noteCount": 180,
               "deckCount": 3,
-              "version": "2026.10.13+1fa43b73",
+              "version": "2026.10.22+1fa43b73",
               "resourceVersion": "owner-pack-6aa5b38bbba0-shuimo-1fa43b734795-137221",
               "title": "2027法硕法基强化题",
               "description": "2027法硕法基强化题。",
@@ -42,6 +42,14 @@
               "license": "仅供个人学习",
               "author": "社区分享",
               "usageHint": "加入后可在 Miki 公共池中安装。",
+              "versionYear": 2027,
+              "preview": {
+                "url": "miki-public/previews/3edc8ce72bafae41ce08e37ff8c713c97c8af68f3d052bcf985a2faeadb74837.preview.json",
+                "sizeBytes": 44587,
+                "sha256": "3edc8ce72bafae41ce08e37ff8c713c97c8af68f3d052bcf985a2faeadb74837",
+                "cardCount": 5
+              },
+              "hasAnalysis": false,
               "t1CandidateCount": 0,
               "blockedTemplateCount": 0
             }
@@ -79,7 +87,7 @@
               "cardCount": 330,
               "noteCount": 330,
               "deckCount": 18,
-              "version": "2026.10.13+230e5dde",
+              "version": "2026.10.22+230e5dde",
               "resourceVersion": "owner-pack-94b82faa40c4-original-230e5dde8c00-143984",
               "title": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)",
               "description": "QY27法硕刑法强化题_330题答案解析补全版_v2_排序清理(1)。",
@@ -87,6 +95,14 @@
               "license": "仅供个人学习",
               "author": "社区分享",
               "usageHint": "加入后可在 Miki 公共池中安装。",
+              "versionYear": 2027,
+              "preview": {
+                "url": "miki-public/previews/20195b9fd0b867fc3fcdb07883189a5ecea5add822722e15993dff4aeec09a44.preview.json",
+                "sizeBytes": 33465,
+                "sha256": "20195b9fd0b867fc3fcdb07883189a5ecea5add822722e15993dff4aeec09a44",
+                "cardCount": 5
+              },
+              "hasAnalysis": true,
               "t1CandidateCount": 0,
               "blockedTemplateCount": 0
             }
@@ -124,7 +140,7 @@
               "cardCount": 2090,
               "noteCount": 2090,
               "deckCount": 281,
-              "version": "2026.10.13+e642031c",
+              "version": "2026.10.22+e642031c",
               "resourceVersion": "zh2000-clean-clean-e642031cf170-1143561",
               "title": "27法硕 ZH2000 基础+进阶",
               "description": "27法硕 ZH2000 基础+进阶。",
@@ -132,6 +148,14 @@
               "license": "仅供个人学习",
               "author": "社区分享",
               "usageHint": "加入后可在 Miki 公共池中安装。",
+              "versionYear": 2027,
+              "preview": {
+                "url": "miki-public/previews/32847a84b8a83ac16099e7e72ff93f5700136c80a29c49ddd71ea438a88990bd.preview.json",
+                "sizeBytes": 48410,
+                "sha256": "32847a84b8a83ac16099e7e72ff93f5700136c80a29c49ddd71ea438a88990bd",
+                "cardCount": 5
+              },
+              "hasAnalysis": true,
               "t1CandidateCount": 0,
               "blockedTemplateCount": 1
             }
@@ -169,7 +193,7 @@
               "cardCount": 863,
               "noteCount": 863,
               "deckCount": 88,
-              "version": "2026.10.13+aed3cea5",
+              "version": "2026.10.22+aed3cea5",
               "resourceVersion": "qy-lsat-criminal-law-parent-child-structured-aed3cea542f1-2456883",
               "title": "于越刑法母子题",
               "description": "于越刑法母子题，含863张卡片、88个题组，423道母题、440道子题。",
@@ -177,6 +201,14 @@
               "license": "仅供个人学习",
               "author": "社区分享",
               "usageHint": "加入后可在 Miki 公共池中安装。",
+              "versionYear": 2027,
+              "preview": {
+                "url": "miki-public/previews/df27a9937637e2af0cea646d329f7d5eecb80d3a9c715e02f18a8537fcd31322.preview.json",
+                "sizeBytes": 87325,
+                "sha256": "df27a9937637e2af0cea646d329f7d5eecb80d3a9c715e02f18a8537fcd31322",
+                "cardCount": 5
+              },
+              "hasAnalysis": true,
               "t1CandidateCount": 0,
               "blockedTemplateCount": 1
             }
@@ -214,7 +246,7 @@
               "cardCount": 165,
               "noteCount": 165,
               "deckCount": 5,
-              "version": "2026.10.13+88907564",
+              "version": "2026.10.22+88907564",
               "resourceVersion": "postgrad-politics-xutao-stage-tests-mobile-compatible-889075649912-98291",
               "title": "27徐涛强化课阶段测",
               "description": "徐涛强化课阶段测，含史纲、思修、马原、毛中特、新思想五科共165题，每科33题。",
@@ -222,6 +254,14 @@
               "license": "仅供个人学习",
               "author": "社区分享",
               "usageHint": "选择选项后展开答案与解析；保留五科顺序。",
+              "versionYear": 2027,
+              "preview": {
+                "url": "miki-public/previews/485cf8b48d57067d936bb54dca8e3203375984a255101b2e043e43f952e39e71.preview.json",
+                "sizeBytes": 48159,
+                "sha256": "485cf8b48d57067d936bb54dca8e3203375984a255101b2e043e43f952e39e71",
+                "cardCount": 5
+              },
+              "hasAnalysis": false,
               "t1CandidateCount": 5,
               "blockedTemplateCount": 0
             }
@@ -259,7 +299,7 @@
               "cardCount": 1042,
               "noteCount": 1042,
               "deckCount": 25,
-              "version": "2026.10.13+62cb8f93",
+              "version": "2026.10.22+62cb8f93",
               "resourceVersion": "juexiao-5000-criminal-basic-original-62cb8f935516-568662",
               "title": "觉晓5000题刑法（偏基础）",
               "description": "觉晓5000题刑法（偏基础）。",
@@ -267,6 +307,14 @@
               "license": "仅供个人学习",
               "author": "社区分享",
               "usageHint": "加入后可在 Miki 公共池中安装。",
+              "versionYear": 2027,
+              "preview": {
+                "url": "miki-public/previews/2b6abe91e60016c3fce2fe929711a71f320ccb2cc33b051d6f87cb4e720dbc36.preview.json",
+                "sizeBytes": 23256,
+                "sha256": "2b6abe91e60016c3fce2fe929711a71f320ccb2cc33b051d6f87cb4e720dbc36",
+                "cardCount": 5
+              },
+              "hasAnalysis": true,
               "t1CandidateCount": 0,
               "blockedTemplateCount": 0
             }
@@ -304,7 +352,7 @@
               "cardCount": 1265,
               "noteCount": 1265,
               "deckCount": 34,
-              "version": "2026.10.13+10750728",
+              "version": "2026.10.22+10750728",
               "resourceVersion": "juexiao-5000-civil-basic-original-107507282ff0-683861",
               "title": "觉晓5000题民法（偏基础）",
               "description": "觉晓5000题民法（偏基础）。",
@@ -312,6 +360,14 @@
               "license": "仅供个人学习",
               "author": "社区分享",
               "usageHint": "加入后可在 Miki 公共池中安装。",
+              "versionYear": 2027,
+              "preview": {
+                "url": "miki-public/previews/2586a8b21dfdef739a38fab92407644432ddc958e0d97980ebe3d7a444a24414.preview.json",
+                "sizeBytes": 28546,
+                "sha256": "2586a8b21dfdef739a38fab92407644432ddc958e0d97980ebe3d7a444a24414",
+                "cardCount": 5
+              },
+              "hasAnalysis": true,
               "t1CandidateCount": 0,
               "blockedTemplateCount": 0
             }
@@ -349,7 +405,7 @@
               "cardCount": 1172,
               "noteCount": 1172,
               "deckCount": 15,
-              "version": "2026.10.13+405eb6f8",
+              "version": "2026.10.22+405eb6f8",
               "resourceVersion": "owner-pack-35b33126ad6a-image-405eb6f8fabe-23542138",
               "title": "27肖1000政治anki卡组",
               "description": "五科1172题，含1148道选择题与24道材料分析题；提供图片解析和纯文字解析两个版本。",
@@ -357,6 +413,14 @@
               "license": "仅供个人学习",
               "author": "肖秀荣 / 用户整理",
               "usageHint": "按科目、题型和章节复习；两个版本题目与答案一致，可按阅读习惯选择解析形式。",
+              "versionYear": 2027,
+              "preview": {
+                "url": "miki-public/previews/0793369f2cb64af52116801df5ade1e71f3a40fec6b5bce6ab5e3cf3b7909c6a.preview.json",
+                "sizeBytes": 66914,
+                "sha256": "0793369f2cb64af52116801df5ade1e71f3a40fec6b5bce6ab5e3cf3b7909c6a",
+                "cardCount": 5
+              },
+              "hasAnalysis": true,
               "t1CandidateCount": 5,
               "blockedTemplateCount": 0
             },
@@ -374,7 +438,7 @@
               "cardCount": 1172,
               "noteCount": 1172,
               "deckCount": 15,
-              "version": "2026.10.13+4e0ddd2c",
+              "version": "2026.10.22+4e0ddd2c",
               "resourceVersion": "owner-pack-35b33126ad6a-text-4e0ddd2c4820-793805",
               "title": "27肖1000政治anki卡组",
               "description": "五科1172题，含1148道选择题与24道材料分析题；提供图片解析和纯文字解析两个版本。",
@@ -382,6 +446,14 @@
               "license": "仅供个人学习",
               "author": "肖秀荣 / 用户整理",
               "usageHint": "按科目、题型和章节复习；两个版本题目与答案一致，可按阅读习惯选择解析形式。",
+              "versionYear": 2027,
+              "preview": {
+                "url": "miki-public/previews/22ebf77ba497c7c51709a27afed5ee0da392a8ac7706e13a7e12c47f9ccfd8e3.preview.json",
+                "sizeBytes": 59373,
+                "sha256": "22ebf77ba497c7c51709a27afed5ee0da392a8ac7706e13a7e12c47f9ccfd8e3",
+                "cardCount": 5
+              },
+              "hasAnalysis": false,
               "t1CandidateCount": 5,
               "blockedTemplateCount": 0
             }
