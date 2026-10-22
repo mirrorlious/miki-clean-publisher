@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'miki-publisher.json'
+      - 'miki-preview-candidates.json'
+      - 'miki-public/previews/**'
       - 'README.md'
       - 'scripts/**'
       - '.github/workflows/miki-owner-publisher.yml'
@@ -12,6 +14,8 @@ on:
       - main
     paths:
       - 'miki-publisher.json'
+      - 'miki-preview-candidates.json'
+      - 'miki-public/previews/**'
       - 'README.md'
       - 'scripts/**'
       - '.github/workflows/miki-owner-publisher.yml'
@@ -58,6 +62,7 @@ jobs:
           scripts/test_sync_owner_inbox.py
           scripts/test_sync_owner_inbox_safe.py
           scripts/test_publish_latest_pointer.py
+          scripts/test_public_pool_preview.py
       - name: Stage Owner Inbox candidates in validation workspace
         id: inbox
         run: python scripts/sync_owner_inbox_safe.py --source-dir "$RUNNER_TEMP/miki-owner-inbox" --json
@@ -71,6 +76,9 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
+          import sys
+          sys.path.insert(0, 'scripts')
+          from public_pool_preview import verified_preview
 
           config = json.loads(Path('miki-publisher.json').read_text(encoding='utf-8'))
           state = json.loads(Path('.miki-publish-state.json').read_text(encoding='utf-8'))
@@ -98,6 +106,9 @@ jobs:
           for family in state['packs']:
               for release in family['releases']:
                   for variant in release['variants']:
+                      if variant.get('preview'):
+                          assert release['status'] == 'ACTIVE' and release['releaseId'] == family['currentReleaseId']
+                          assert verified_preview(Path('.'), variant), 'sample must match the current accepted source'
                       assert variant['sourcePath'] in configured_sources
                       manifest = json.loads(Path(variant['manifestPath']).read_text(encoding='utf-8'))
                       report = json.loads(Path(variant['templateReportPath']).read_text(encoding='utf-8'))
@@ -183,7 +194,7 @@ jobs:
         if: steps.decision.outputs.publish_needed == 'true'
         id: manifest_commit
         run: |
-          git add -- '.miki-'*.manifest.v2.json '.miki-reports/' '.miki-publish-state.json'
+          git add -- '.miki-'*.manifest.v2.json '.miki-reports/' '.miki-publish-state.json' 'miki-public/previews/'
           if git diff --cached --quiet; then
             echo "No manifest changes detected."
           else

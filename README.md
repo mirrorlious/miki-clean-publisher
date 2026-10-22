@@ -52,6 +52,36 @@ Miki must fetch the feed at that immutable commit and verify its digest before p
 - `.github/workflows/miki-owner-publisher.yml` — PR validation, five-minute polling and publication workflow.
 <!-- manual-owner-inbox-refresh: 2026-10-09-juexiao-5000 -->
 
+## Bounded Public Pool previews
+
+Presentation-only candidate files are materialized with an immutable revision
+of Miki's existing APKG parser and static renderer, without executing source
+template JavaScript. `miki-preview-candidates.json` records renderer provenance,
+pack/release/variant identity and the exact source APKG SHA256. The remote
+workflow independently validates candidates and promotes only those matching
+the current accepted ACTIVE variant. Changed/new sources without a matching
+candidate stay installable and expose no stale preview. This avoids any new
+cross-repository credential. Original APKG bytes, fingerprints and access
+semantics are unchanged.
+
+Each content-addressed `miki-public/previews/<sha256>.preview.json` has 3–5
+sample cards, at most 128 KiB, and an actual deck-derived chapter directory
+(at most 128 top-level groups). Samples identify their chapter and are chosen
+across chapters; opening the directory never fetches full chapter bodies.
+Shared template CSS is stored once. The Feed descriptor carries exact size,
+SHA256, card count and a path pinned to the same commit as its manifest.
+
+The generated sample is validated again before Feed construction: source
+pack/resource identity, byte length, digest, finite sample count, bounded
+chapters and presentation-only fields must match. Existing immutable samples
+are retained for rollback; a different payload cannot overwrite their path.
+The manifest/sample snapshot is committed before the Feed, and the existing
+digest-bound latest pointer advances only after that Feed commit exists.
+
+The Owner confirmed the current public catalog edition is 2027 on 2026-10-22;
+`defaults.versionYear` records this separately from publication dates and
+content coverage. Future pack-specific `versionYear` may override it.
+
 ## 27肖1000政治anki卡组
 
 五科1172题，统一名称；同一发布版本提供“纯文字解析”和“图片解析”，默认纯文字。两版题目、选项、答案和笔记GUID一致，解析呈现不同，分别保留真实内容指纹及文件SHA256。史纲“苹命”已修正为“革命”。校验记录见 [文字校验记录](audits/xiao1000-2027/text-verification.json)。

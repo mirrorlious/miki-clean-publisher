@@ -543,6 +543,11 @@ def build_variant(config: dict, source: Path, pack: dict, release: dict, variant
         dump_json(ROOT / f".miki-{metadata['packId']}.manifest.v2.json", manifest)
         dump_json(ROOT / f".miki-reports/{metadata['packId']}.json", report)
 
+    from public_pool_preview import candidate_fields
+    preview_fields = candidate_fields(ROOT, {
+        **metadata, "sourceSha256": inspection["sha256"], "resourceVersion": resource_version,
+    }) if release.get("status") == "ACTIVE" and release["releaseId"] == pack.get("currentReleaseId") else {}
+
     return {
         **metadata,
         "version": version,
@@ -559,6 +564,7 @@ def build_variant(config: dict, source: Path, pack: dict, release: dict, variant
         "templateFingerprint": inspection["templateFingerprint"],
         "t1CandidateCount": report["summary"]["t1CandidateCount"],
         "blockedTemplateCount": report["summary"]["blockedTemplateCount"],
+        **preview_fields,
     }
 
 
@@ -637,6 +643,8 @@ def build_with_config(config: dict) -> None:
                     "license": built["license"],
                     "author": built["author"],
                     "usageHint": built["usageHint"],
+                    **({"versionYear": built["versionYear"]} if built.get("versionYear") else {}),
+                    **({"preview": built["preview"], "hasAnalysis": built.get("hasAnalysis", False)} if built.get("preview") else {}),
                     "t1CandidateCount": built["t1CandidateCount"],
                     "blockedTemplateCount": built["blockedTemplateCount"],
                 })
@@ -667,6 +675,8 @@ def legacy_entry(item: dict, repository: str, commit: str, runtime: dict | None 
     variant-specific files. Adds releaseId/variantId without changing the
     legacy field set."""
     runtime_value = runtime or {"contentFormat": "anki", "renderEngine": "anki-core-v1"}
+    from public_pool_preview import verified_preview
+    preview = verified_preview(ROOT, item)
     return {
         "id": item["packId"],
         "packId": item["packId"],
@@ -674,6 +684,9 @@ def legacy_entry(item: dict, repository: str, commit: str, runtime: dict | None 
         "description": item.get("description", ""),
         "subject": item.get("subject", ""),
         "type": "cards",
+        **({"versionYear": item["versionYear"]} if item.get("versionYear") else {}),
+        **({"preview": preview} if preview else {}),
+        **({"hasAnalysis": True} if item.get("hasAnalysis") is True else {}),
         "version": item["version"],
         "resourceVersion": item["resourceVersion"],
         "manifestSchemaVersion": 2,
