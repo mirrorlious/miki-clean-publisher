@@ -52,6 +52,12 @@ class PublicPoolPreviewTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             verified_preview(self.root, self.item)
 
+        del self.payload["cards"][0]["review"]
+        self.payload["chapters"] *= 129
+        self.write_sample()
+        with self.assertRaises(ValueError):
+            verified_preview(self.root, self.item)
+
     def test_candidate_binds_exact_source_release_variant_and_renderer(self):
         self.write_sample()
         self.item.update(releaseId="v1", variantId="original", sourceSha256="b" * 64)
@@ -65,8 +71,3 @@ class PublicPoolPreviewTest(unittest.TestCase):
         target.write_text(json.dumps(registry), encoding="utf-8")
         with self.assertRaises(ValueError):
             candidate_fields(self.root, self.item)
-        del self.payload["cards"][0]["review"]
-        self.payload["chapters"] *= 129
-        self.write_sample()
-        with self.assertRaises(ValueError):
-            verified_preview(self.root, self.item)
